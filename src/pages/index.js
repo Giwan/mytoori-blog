@@ -1,15 +1,40 @@
 import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/layout'
 import Menu from '../components/Menu'
 
-import Layout from '../components/layout'
-import Image from '../components/image'
+const Index = ({
+    data: {
+        allMarkdownRemark: { edges },
+    },
+}) => {
+    const Posts = edges.map(edge => (
+        <a href={edge.node.frontmatter.path} key={edge.node.id}>
+            {edge.node.frontmatter.title}
+        </a>
+    ))
+    return (
+        <Layout>
+            <Menu />
+            <div>{Posts}</div>
+        </Layout>
+    )
+}
 
-const IndexPage = () => (
-  <Layout>
-    <Menu />
-    <h1>Recent articles</h1>
-    <p>Some of the technical concepts solved on mytoori.com</p>
-  </Layout>
-)
+export default Index
 
-export default IndexPage
+export const pageQuery = graphql`
+    query {
+        allMarkdownRemark {
+            edges {
+                node {
+                    id
+                    frontmatter {
+                        path
+                        title
+                    }
+                }
+            }
+        }
+    }
+`
