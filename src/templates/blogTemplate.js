@@ -26,6 +26,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         path
+        date
         title
       }
     }
