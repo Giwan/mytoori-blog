@@ -2,17 +2,9 @@
 path: "/vscode-debugging"
 date: "2018-01-05"
 author: "Giwan Persaud"
-title: "VSCode debugging"
+title: "Debugging with Visual Studio Code"
+summary: "A short write up of how debugging works with visual studio code"
 ---
-
-# Debugging with Visual Studio Code
-
-## Tags
-
--   Javascript
--   React
--   Chrome
--   VSCode
 
 VSCode has this nifty feature that allows breakpoints to be set in the editor while building the front-end in the chrome browser.
 
@@ -30,32 +22,35 @@ In the debug view click on the cog wheel in the top left to have VSCode automati
 }
 ```
 
--   `name`: The name of the task shown next to the play button (top left)
--   `Type`: What type of process are you running. (_Node | Chrome_)
--   `Request`: should it attach to an existing session or create a new one (_alt: attach_)
--   `webRoot`: Points to the source files or say the build files. I.e. `${workspaceFolder}/build` or `${workspaceFolder}/dist`
+`name` _The name of the task shown next to the play button (top left)_
+
+`Type` _What type of process are you running. (**Node | Chrome**)_
+
+`Request` _Should it attach to an existing session or create a new one (**alt: attach**)_
+
+`webRoot` _Points to the source files or say the build files. I.e. `${workspaceFolder}/build` or `$rkspaceFolder}/dist`_
 
 Start the front-end from the terminal and leave it running. Press the play button in the debug menu. A new chrome session will be started.
-Set a breakpoint in vscode by clicking to the left of the line number.
+Set a breakpoint in vscode by clicking to the left of the line number. The breakpoint is indicated with a red dot.
 Now run the front-end normally and the execution should stop at the breakpoint.
 
-### Attaching to a running process
+## Attaching to a running process
 
 This does require chrome to be started with remote debugging enabled:
 `$> /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222`
 
 ```
 {
-            "name": "Attach",
-            "type": "chrome",
-            "request": "attach",
-            "port": 9222,
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
-        },
+    "name": "Attach",
+    "type": "chrome",
+    "request": "attach",
+    "port": 9222,
+    "url": "http://localhost:3000",
+    "webRoot": "${workspaceFolder}"
+}
 ```
 
-## Conditional breakpoint
+# Conditional breakpoint
 
 Now that it's possible to set break points directly in the editor, it would be nice to have some more control. Conditional breakpoints provide a conditional, which if true, will trigger the breakpoint.
 
