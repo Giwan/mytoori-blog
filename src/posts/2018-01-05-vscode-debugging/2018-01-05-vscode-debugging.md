@@ -22,13 +22,12 @@ In the debug view click on the cog wheel in the top left to have VSCode automati
 }
 ```
 
-`name` _The name of the task shown next to the play button (top left)_
-
-`Type` _What type of process are you running. (**Node | Chrome**)_
-
-`Request` _Should it attach to an existing session or create a new one (**alt: attach**)_
-
-`webRoot` _Points to the source files or say the build files. I.e. `${workspaceFolder}/build` or `$rkspaceFolder}/dist`_
+| Key       | Description                                                                                                     |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
+| `name`    | _The name of the task shown next to the play button (top left)_                                                 |
+| `Type`    | _What type of process are you running. (**Node \| Chrome**)_                                                    |
+| `Request` | _Should it attach to an existing session or create a new one (**alt: attach**)_                                 |
+| `webRoot` | _Points to the source files or say the build files. I.e. `${workspaceFolder}/build` or `$rkspaceFolder} /dist`_ |
 
 Start the front-end from the terminal and leave it running. Press the play button in the debug menu. A new chrome session will be started.
 Set a breakpoint in vscode by clicking to the left of the line number. The breakpoint is indicated with a red dot.

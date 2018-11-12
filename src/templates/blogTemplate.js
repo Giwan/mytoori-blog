@@ -9,6 +9,7 @@ const blogPostContainer = {
 
 const blogPostContentStyle = {
     fontSize: 22,
+    lineHeight: "1.6em",
 };
 
 export default function Template({
@@ -19,14 +20,14 @@ export default function Template({
     return (
         <Layout>
             <div style={blogPostContainer}>
-                <div className="blog-post">
+                <article className="blog-post">
                     <h1>{frontmatter.title}</h1>
                     <h2>{frontmatter.date}</h2>
-                    <div
+                    <article
                         style={blogPostContentStyle}
                         dangerouslySetInnerHTML={{ __html: html }}
                     />
-                </div>
+                </article>
             </div>
         </Layout>
     );
