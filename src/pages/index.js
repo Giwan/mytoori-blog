@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import Menu from "../components/Menu";
 import { spacing, colors } from "../components/style";
+import { showLongDate } from "../config/helpers";
 
 const listStyle = {
     display: "grid",
@@ -11,14 +12,11 @@ const listStyle = {
 };
 
 const listItemStyle = {
-    fontFamily: "Work Sans",
-    fontSize: "32px",
-    fontWeight: 700,
     color: colors.primary,
     display: "inline-block",
     border: `2px solid ${colors.primary}`,
     width: "100%",
-    height: "150px",
+    height: "350px",
     borderRadius: "3px",
     padding: spacing.default,
 };
@@ -28,9 +26,13 @@ const Index = ({
         allMarkdownRemark: { edges },
     },
 }) => {
-    const Posts = edges.map(edge => (
-        <a href={edge.node.frontmatter.path} key={edge.node.id}>
-            <div style={listItemStyle}>{edge.node.frontmatter.title}</div>
+    const Posts = edges.map(({ node }) => (
+        <a href={node.frontmatter.path} key={node.id}>
+            <div style={listItemStyle}>
+                <h1>{node.frontmatter.title}</h1>
+                <div>{showLongDate(node.frontmatter.date)}</div>
+                <div>{node.frontmatter.summary}</div>
+            </div>
         </a>
     ));
     return (
@@ -52,6 +54,9 @@ export const pageQuery = graphql`
                     frontmatter {
                         path
                         title
+                        author
+                        date
+                        summary
                     }
                 }
             }

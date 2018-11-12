@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
+import { showLongDate } from "../config/helpers";
 
 const blogPostContainer = {
     margin: `10% auto`,
@@ -22,7 +23,9 @@ export default function Template({
             <div style={blogPostContainer}>
                 <article className="blog-post">
                     <h1>{frontmatter.title}</h1>
-                    <h2>{frontmatter.date}</h2>
+                    <h2>
+                        {showLongDate(frontmatter.date)} - {frontmatter.author}
+                    </h2>
                     <article
                         style={blogPostContentStyle}
                         dangerouslySetInnerHTML={{ __html: html }}
@@ -41,6 +44,7 @@ export const pageQuery = graphql`
                 path
                 date
                 title
+                author
             }
         }
     }
