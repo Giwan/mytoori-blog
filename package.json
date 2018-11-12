@@ -15,7 +15,8 @@
         "gatsby-transformer-sharp": "^2.1.4",
         "react": "^16.5.1",
         "react-dom": "^16.5.1",
-        "react-helmet": "^5.2.0"
+        "react-helmet": "^5.2.0",
+        "serve": "^10.0.2"
     },
     "keywords": [
         "gatsby"
@@ -24,11 +25,11 @@
     "scripts": {
         "build": "gatsby build",
         "develop": "gatsby develop",
-        "start": "npm run develop",
+        "start": "serve ./public",
         "format": "prettier --write \"src/**/*.js\"",
         "test": "echo \"Error: no test specified\" && exit 1",
         "predeploy": "npm run build",
-        "deploy": "now --public ./public"
+        "deploy": "now"
     },
     "devDependencies": {
         "prettier": "^1.14.2"
