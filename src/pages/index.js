@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import Menu from "../components/Menu";
+import Image from "../components/image";
 import { spacing, colors } from "../components/style";
 import { showLongDate } from "../config/helpers";
 
@@ -29,6 +30,11 @@ const Index = ({
     const Posts = edges.map(({ node }) => (
         <a href={node.frontmatter.path} key={node.id}>
             <div style={listItemStyle}>
+                <Image
+                    url={node.frontmatter.image}
+                    alt={node.frontmatter.image}
+                />
+
                 <h1>{node.frontmatter.title}</h1>
                 <div>{showLongDate(node.frontmatter.date)}</div>
                 <div>{node.frontmatter.summary}</div>
@@ -57,6 +63,7 @@ export const pageQuery = graphql`
                         author
                         date
                         summary
+                        image
                     }
                 }
             }

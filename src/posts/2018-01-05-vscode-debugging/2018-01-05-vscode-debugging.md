@@ -4,6 +4,7 @@ date: "2018-01-05"
 author: "Giwan Persaud"
 title: "Debugging with Visual Studio Code"
 summary: "A short write up of how debugging works with visual studio code"
+image: "/bg-2.png"
 ---
 
 VSCode has this nifty feature that allows breakpoints to be set in the editor while building the front-end in the chrome browser.

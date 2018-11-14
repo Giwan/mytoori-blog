@@ -24,6 +24,7 @@ exports.createPages = ({ actions, graphql }) => {
                             author
                             date
                             summary
+                            image
                         }
                     }
                 }
