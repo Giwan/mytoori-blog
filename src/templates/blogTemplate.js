@@ -23,7 +23,6 @@ export default function Template({
         <Layout>
             <div style={blogPostContainer}>
                 <article className="blog-post">
-                    <Image url={frontmatter.image} />
                     <h1>{frontmatter.title}</h1>
                     <h2>
                         {showLongDate(frontmatter.date)} - {frontmatter.author}

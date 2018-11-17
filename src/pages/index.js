@@ -2,24 +2,14 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import Menu from "../components/Menu";
-import Image from "../components/image";
+import PostItem from "../components/postItem";
+
 import { spacing, colors } from "../components/style";
-import { showLongDate } from "../config/helpers";
 
 const listStyle = {
     display: "grid",
     grid: "repeat(3, 150px) / repeat(3, 1fr)",
     gridGap: spacing.default,
-};
-
-const listItemStyle = {
-    color: colors.primary,
-    display: "inline-block",
-    border: `2px solid ${colors.primary}`,
-    width: "100%",
-    height: "350px",
-    borderRadius: "3px",
-    padding: spacing.default,
 };
 
 const Index = ({
@@ -28,18 +18,7 @@ const Index = ({
     },
 }) => {
     const Posts = edges.map(({ node }) => (
-        <a href={node.frontmatter.path} key={node.id}>
-            <div style={listItemStyle}>
-                <Image
-                    url={node.frontmatter.image}
-                    alt={node.frontmatter.image}
-                />
-
-                <h1>{node.frontmatter.title}</h1>
-                <div>{showLongDate(node.frontmatter.date)}</div>
-                <div>{node.frontmatter.summary}</div>
-            </div>
-        </a>
+        <PostItem key={node.id} node={node} />
     ));
     return (
         <Layout>
