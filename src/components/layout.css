@@ -630,19 +630,19 @@ pre tt:after {
     }
 }
 
-.gatsby-highlight-code-line {
-    background-color: #feb;
+/* .gatsby-highlight-code-line {
+    background-color: #212121;
     display: block;
     margin-right: -1em;
     margin-left: -1em;
     padding-right: 1em;
     padding-left: 0.75em;
     border-left: 0.25em solid #f99;
-}
+} */
 
 .gatsby-highlight {
     background-color: #212121;
-    color: white;
+    color: #fefefe;
     margin: 0.5em 0;
     padding: 1em;
     overflow: auto;

@@ -2,7 +2,7 @@
 path: "/react-instead-of-jsp"
 date: "2018-11-11"
 title: "React instead of JSP"
-summary: "this is a  test"
+summary: "How React can replace Java Server Pages, handlebarJS, etc. as a templating language on the server"
 image: ""
 ---
 
@@ -26,6 +26,9 @@ JSP and other such templating languages already allow for this but I would argue
 Create a standard node application with express. We first create the application with
 
 ```bash
+# -- terminal
+
+
 # create project folder
 mkdir react-on-the-server
 
@@ -48,14 +51,13 @@ npm i --save express react react-dom express-react-views
 [Express-react-views](https://github.com/reactjs/express-react-views) will allow react to run as the view engine on the server. More information. The following is the express file that will set react as our view engine.
 
 ```javascript
-// server.js
-// where your node app starts
+// -- server.js
 
-// init project
 const express = require("express");
 const app = express();
 
-// Set the view engine and indicate that our template
+// Set the view engine
+// indicate that template
 // files will end with "JSX"
 app.set("views", __dirname + "/views");
 app.set("view engine", "jsx");
@@ -80,6 +82,9 @@ const listener = app.listen(9000, () => {
 Now that the server.js file has been setup to find our view file, the next step is to create the views.
 
 ```bash
+# -- terminal
+
+
 # create the views folder
 mkdir views
 
@@ -92,8 +97,9 @@ touch views/index.jsx
 Open the newly created index.jsx file to turn it into a react component that can be used to render the content.
 
 ```javascript
-const React = require("react");
+// -- index.jsx
 
+const React = require("react");
 class HelloMessage extends React.Component {
     render() {
         return <div>Hello {this.props.name} </div>;
@@ -106,6 +112,7 @@ module.exports = HelloMessage;
 The name of the component is ignored. The view is accessed through the file name.
 
 ```javascript
+// --highlight
 response.render("index", { name: "hello world" });
 ```
 
@@ -114,6 +121,8 @@ response.render("index", { name: "hello world" });
 With that the project can be started.
 
 ```bash
+# -- terminal
+
 node server.js
 ```
 
