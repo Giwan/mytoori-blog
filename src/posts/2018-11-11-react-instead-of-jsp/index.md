@@ -47,12 +47,12 @@ npm i --save express react react-dom express-react-views
 
 [Express-react-views](https://github.com/reactjs/express-react-views) will allow react to run as the view engine on the server. More information. The following is the express file that will set react as our view engine.
 
-```JavaScript
+```javascript
 // server.js
 // where your node app starts
 
 // init project
-const express = require('express');
+const express = require("express");
 const app = express();
 
 // Set the view engine and indicate that our template
@@ -62,20 +62,19 @@ app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
 // This is where express can find it's static assets
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // Renders "index.jsx" on the route "/"
 // In addition the value "hello world" is passed
 // to the view as props
 app.get("/", (request, response) => {
-  response.render("index", { name: "hello world" });
+    response.render("index", { name: "hello world" });
 });
 
 // listen for requests :)
-const listener = app.listen(9000, ()=> {
-  console.log(`Listening on port ${listener.address().port}`);
+const listener = app.listen(9000, () => {
+    console.log(`Listening on port ${listener.address().port}`);
 });
-
 ```
 
 Now that the server.js file has been setup to find our view file, the next step is to create the views.
@@ -92,13 +91,13 @@ touch views/index.jsx
 
 Open the newly created index.jsx file to turn it into a react component that can be used to render the content.
 
-```JavaScript
+```javascript
 const React = require("react");
 
 class HelloMessage extends React.Component {
-  render() {
-    return(<div>Hello {this.props.name} </div>);
-  }
+    render() {
+        return <div>Hello {this.props.name} </div>;
+    }
 }
 
 module.exports = HelloMessage;
@@ -106,7 +105,7 @@ module.exports = HelloMessage;
 
 The name of the component is ignored. The view is accessed through the file name.
 
-```JavaScript
+```javascript
 response.render("index", { name: "hello world" });
 ```
 
