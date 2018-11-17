@@ -34,6 +34,12 @@ module.exports = {
                 icon: "src/images/mytoori-news.svg", // This path is relative to the root of the site.
             },
         },
+        {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                trackingId: "UA-75146522-4",
+            },
+        },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
