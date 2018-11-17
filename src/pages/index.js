@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import Menu from "../components/Menu";
 import PostItem from "../components/postItem";
 
-import { spacing, colors } from "../components/style";
+import { spacing } from "../components/style";
 
 const listStyle = {
     display: "grid",

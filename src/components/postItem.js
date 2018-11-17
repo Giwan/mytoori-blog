@@ -15,7 +15,10 @@ const PostItem = ({ node }) => {
     return (
         <a href={node.frontmatter.path}>
             <div style={listItemStyle}>
-                <img src={node.frontmatter.image} />
+                <img
+                    src={node.frontmatter.image}
+                    alt={node.frontmatter.image}
+                />
 
                 <h1>{node.frontmatter.title}</h1>
                 <div>{showLongDate(node.frontmatter.date)}</div>

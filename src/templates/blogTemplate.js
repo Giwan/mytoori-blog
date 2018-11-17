@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import { showLongDate } from "../config/helpers";
-import Image from "../components/image";
+// import Image from "../components/image";
 
 const blogPostContainer = {
     margin: `10% auto`,
