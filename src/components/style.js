@@ -10,6 +10,7 @@ export const spacing = {
 
 export const font = {
     bolder: 700,
+    family: "Work Sans",
 };
 
 export default {

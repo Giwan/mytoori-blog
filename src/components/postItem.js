@@ -10,6 +10,15 @@ const listItemStyle = {
     width: "100%",
     padding: spacing.default,
     marginBottom: spacing.default,
+
+    title: {},
+
+    date: {
+        textAlign: "right",
+        fontSize: "0.8em",
+        marginBottom: spacing.default,
+        borderBottom: `1px solid ${colors.primaryLight}`,
+    },
 };
 
 const PostItem = ({ node }) => {
@@ -21,8 +30,10 @@ const PostItem = ({ node }) => {
                     alt={node.frontmatter.image}
                 />
 
-                <h1>{node.frontmatter.title}</h1>
-                <div>{showLongDate(node.frontmatter.date)}</div>
+                <h1 style={listItemStyle.title}>{node.frontmatter.title}</h1>
+                <div style={listItemStyle.date}>
+                    {showLongDate(node.frontmatter.date)}
+                </div>
                 <div>{node.frontmatter.summary}</div>
             </div>
         </a>

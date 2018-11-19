@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "gatsby";
-import { colors } from "./style";
+import { colors, font, spacing } from "./style";
 
 const menuStyle = {
-    borderBottom: `1px solid ${colors.primary}`,
-    marginBottom: "16px",
+    // borderBottom: `1px solid ${colors.primary}`,
+    backgroundColor: colors.primary,
+    marginBottom: spacing.default,
+    padding: `0 ${spacing.default}`,
+    textAlign: "right",
 
     link: {
         textTransform: "uppercase",
         textDecoration: "none",
-        color: colors.primary,
-        fontFamily: "Work Sans",
+        color: colors.primaryLight,
+        fontFamily: font.family,
         fontWeight: 700,
     },
 };

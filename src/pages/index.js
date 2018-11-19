@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import Menu from "../components/Menu";
+import Menu from "../components/menu";
 import PostItem from "../components/postItem";
 
 import { spacing } from "../components/style";

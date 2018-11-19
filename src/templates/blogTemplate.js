@@ -2,16 +2,23 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import { showLongDate } from "../config/helpers";
+import { colors } from "../components/style";
 // import Image from "../components/image";
 
-const blogPostContainer = {
-    margin: `10% auto`,
-    maxWidth: 960,
-};
+const blogPost = {
+    container: {
+        margin: `10% auto`,
+        maxWidth: 960,
+    },
 
-const blogPostContentStyle = {
-    fontSize: 22,
-    lineHeight: "1.6em",
+    content: {
+        fontSize: 22,
+        lineHeight: "1.6em",
+    },
+
+    date: {
+        color: colors.primary,
+    },
 };
 
 export default function Template({
@@ -21,14 +28,14 @@ export default function Template({
     const { frontmatter, html } = markdownRemark;
     return (
         <Layout>
-            <div style={blogPostContainer}>
+            <div style={blogPost.container}>
                 <article className="blog-post">
                     <h1>{frontmatter.title}</h1>
-                    <h2>
+                    <div style={blogPost.date}>
                         {showLongDate(frontmatter.date)} - {frontmatter.author}
-                    </h2>
+                    </div>
                     <article
-                        style={blogPostContentStyle}
+                        style={blogPost.content}
                         dangerouslySetInnerHTML={{ __html: html }}
                     />
                 </article>
