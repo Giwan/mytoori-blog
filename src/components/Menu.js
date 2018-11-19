@@ -3,16 +3,14 @@ import { Link } from "gatsby";
 import { colors, font, spacing } from "./style";
 
 const menuStyle = {
-    // borderBottom: `1px solid ${colors.primary}`,
-    backgroundColor: colors.primary,
-    marginBottom: spacing.default,
-    padding: `0 ${spacing.default}`,
+    borderBottom: `8px solid ${colors.primary}`,
     textAlign: "right",
+    marginBottom: spacing.default,
 
     link: {
         textTransform: "uppercase",
         textDecoration: "none",
-        color: colors.primaryLight,
+        color: colors.primary,
         fontFamily: font.family,
         fontWeight: 700,
     },

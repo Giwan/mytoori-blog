@@ -5,7 +5,7 @@ export const colors = {
 };
 
 export const spacing = {
-    default: "16px",
+    default: 16,
 };
 
 export const font = {

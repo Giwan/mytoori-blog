@@ -2,8 +2,9 @@
 path: "/react-instead-of-jsp"
 date: "2018-11-11"
 title: "React instead of JSP"
-summary: "How React can replace Java Server Pages, handlebarJS, etc. as a templating language on the server"
+summary: "React can replace Java Server Pages (JSP), handlebarJS, etc. as a templating language. There are various reasons why might want this. Re-using knowledge you already have for example."
 image: ""
+author: "Giwan Persaud"
 ---
 
 Recently I had to work on a project that required JSP (Java Server Pages). My knowledge of JSP is pretty poor and so instead of JSP, I wondered if it would be possible to just use react on the server.

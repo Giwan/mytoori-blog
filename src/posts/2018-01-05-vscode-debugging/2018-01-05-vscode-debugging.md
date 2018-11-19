@@ -3,7 +3,7 @@ path: "/vscode-debugging"
 date: "2018-01-05"
 author: "Giwan Persaud"
 title: "Debugging with Visual Studio Code"
-summary: "A short write up of how debugging works with visual studio code"
+summary: "A short article on how debugging works with visual studio code. It's especially useful when debugging server side projects like NodeJS."
 image: ""
 ---
 

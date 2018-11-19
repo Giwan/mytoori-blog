@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import { showLongDate } from "../config/helpers";
-import { colors } from "../components/style";
+import { colors, spacing } from "../components/style";
 // import Image from "../components/image";
 
 const blogPost = {
@@ -11,13 +11,30 @@ const blogPost = {
         maxWidth: 960,
     },
 
+    header: {
+        backgroundColor: colors.primary,
+        color: colors.primaryLight,
+        padding: spacing.default,
+        marginBottom: spacing.default * 4,
+        title: {
+            fontSize: "4em",
+        },
+        summary: {
+            fontSize: "1.5em",
+            lineHeight: "1.25em",
+            fontWeight: 500,
+        },
+        date: {
+            color: colors.primaryLight,
+            textAlign: "right",
+            borderBottom: `1px solid ${colors.primaryLight}`,
+            marginBottom: spacing.default,
+        },
+    },
+
     content: {
         fontSize: 22,
         lineHeight: "1.6em",
-    },
-
-    date: {
-        color: colors.primary,
     },
 };
 
@@ -30,10 +47,19 @@ export default function Template({
         <Layout>
             <div style={blogPost.container}>
                 <article className="blog-post">
-                    <h1>{frontmatter.title}</h1>
-                    <div style={blogPost.date}>
-                        {showLongDate(frontmatter.date)} - {frontmatter.author}
-                    </div>
+                    <header style={blogPost.header}>
+                        <h1 style={blogPost.header.title}>
+                            {frontmatter.title}
+                        </h1>
+
+                        <div style={blogPost.header.date}>
+                            {showLongDate(frontmatter.date)} -{" "}
+                            {frontmatter.author}
+                        </div>
+                        <div style={blogPost.header.summary}>
+                            {frontmatter.summary}
+                        </div>
+                    </header>
                     <article
                         style={blogPost.content}
                         dangerouslySetInnerHTML={{ __html: html }}
@@ -54,6 +80,7 @@ export const pageQuery = graphql`
                 title
                 author
                 image
+                summary
             }
         }
     }
