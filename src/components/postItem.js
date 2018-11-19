@@ -3,12 +3,13 @@ import { spacing, colors } from "../components/style";
 import { showLongDate } from "../config/helpers";
 
 const listItemStyle = {
-    color: colors.primary,
+    backgroundColor: colors.primary,
+    color: colors.primaryLight,
     display: "inline-block",
     border: `2px solid ${colors.primary}`,
     width: "100%",
-    borderRadius: "3px",
     padding: spacing.default,
+    marginBottom: spacing.default,
 };
 
 const PostItem = ({ node }) => {

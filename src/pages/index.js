@@ -8,7 +8,7 @@ import { spacing } from "../components/style";
 
 const listStyle = {
     display: "grid",
-    grid: "repeat(3, 150px) / repeat(3, 1fr)",
+    gridTemplateColumns: "repeat(3, 1fr)",
     gridGap: spacing.default,
 };
 

@@ -8,6 +8,17 @@ html {
 body {
     margin: 0;
     background-color: #eeeeee;
+    /* background-color: #212121; */
+    color: hsla(0, 0%, 0%, 0.8);
+    /* color: white; */
+    font-family: georgia, serif;
+    font-weight: normal;
+    word-wrap: break-word;
+    font-kerning: normal;
+    -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+    -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+    -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+    font-feature-settings: "kern", "liga", "clig", "calt";
 }
 article,
 aside,
@@ -198,17 +209,6 @@ html {
 }
 *:after {
     box-sizing: inherit;
-}
-body {
-    color: hsla(0, 0%, 0%, 0.8);
-    font-family: georgia, serif;
-    font-weight: normal;
-    word-wrap: break-word;
-    font-kerning: normal;
-    -moz-font-feature-settings: "kern", "liga", "clig", "calt";
-    -ms-font-feature-settings: "kern", "liga", "clig", "calt";
-    -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
-    font-feature-settings: "kern", "liga", "clig", "calt";
 }
 img {
     max-width: 100%;
@@ -416,7 +416,7 @@ pre {
     border-radius: 3px;
     overflow: auto;
     word-wrap: normal;
-    padding: 1.45rem;
+    /* padding: 1.45rem; */
 }
 table {
     margin-left: 0;
@@ -641,9 +641,11 @@ pre tt:after {
 } */
 
 .gatsby-highlight {
-    background-color: #212121;
+    background-color: rgb(25, 25, 25);
     color: #fefefe;
-    margin: 0.5em 0;
+    margin: 1em 0;
     padding: 1em;
+    border: 1px solid rgb(20, 20, 20);
+
     overflow: auto;
 }

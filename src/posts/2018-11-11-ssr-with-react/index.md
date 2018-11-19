@@ -2,14 +2,17 @@
 path: "/server-side-rendering-with-react"
 date: "2018-11-11"
 title: "Server side rendering with React"
-summary: "this is a test"
+summary: "Web crawlwers can't parse JS which means that Single Page Applications need to render on the server if they want to be indexed by the search engines."
 image: ""
+author: "Giwan Persaud"
 ---
 
 Mytoori.com's front-end is built with React as a single page application (SPA). Typically these do not play nice with web crawlers from google or bing. This can be seen in the network tab of dev tools. The first response would look like this.
 
 ```html
 <!-- first response from https://mytoori.com/ -->
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -32,8 +35,267 @@ Mytoori.com's front-end is built with React as a single page application (SPA). 
 </html>
 ```
 
-All the content of the application is either in the `app.js` file that the web crawler cannot parse or will be loaded later using REST.
+There is not much here for a web crawler to work with. All the content of the application is either in the `app.js` file that the web crawler cannot parse or will be loaded later using REST. On a browser client this works just fine as the javascript is parsed and the rest of the content retrieved.
 
 ## Server side rendering
 
-With server side rendering (SSR), the SPA is is first fully rendered on the server before it's sent to the client. All of the html content is sent in that first request just as it would be with a statically rendered site.
+With server side rendering (SSR), the SPA is is first fully rendered on the server before it's sent to the client. All of the html content is sent in that first request just as it would be with a statically rendered site, which means that the client has no additional rendering steps before content can be shown.
+
+### Server.js
+
+A server is required for server side rendering to take place. A NodeJS server running express, is a common way of addressing this.
+First create a `server` folder in the root of the project. It consists of three main components.
+
+#### bootstrap.js
+
+This is the file that is initially loaded. It injects important dependencies and then loads the `index` file.
+
+```javascript
+// -- server/bootstrap.js
+
+require("ignore-styles");
+require("url-loader");
+require("file-loader");
+require("babel-register")({
+    ignore: [/(node_modules)/],
+    presets: ["es2015", "react-app"],
+    plugins: ["syntax-dynamic-import", "dynamic-import-node"],
+});
+
+require("./index");
+```
+
+Server styles are ignored with the "ignore-styles" module. "url-loader" and "file-loader" are needed for reasons I'm not reallly sure about. Then the whole thing is pulled through Babel. Babel converts JSX to readable javascript as well as all the new javascript syntax.
+
+#### index.js
+
+In the index.js file, the express server is initialised and started. Next we import the routes from the controller folder with `import router from "./controller/index";`. The express app is then instructed to use the router configuration with `app.use(router)`.
+
+```javascript
+// -- server/index.js
+
+import express from "express";
+import router from "./controller/index";
+
+const app = express();
+const port = 4000;
+
+// Tell the app to use the routes above
+app.use(router);
+
+// start the app
+app.listen(port, () => console.log(`express running on port ${port}`)); //eslint-disable-line
+```
+
+#### server/controller/index.js
+
+Here the router is configured and exported. Three main routes are defined to ensure the static assets can always be served while API requests are directed to the back-end service.
+
+```javascript
+// -- server/controller/index.js (router.js)
+// todo: rename this file to router.js
+
+import express from "express";
+import path from "path";
+import serverRenderer from "../middleware/renderer";
+
+/**
+ * Create the router object
+ */
+const router = express.Router();
+
+// root (/) should always serve our server rendered page
+// serverRenderer will be disussed in the next section.
+router.use("^/$", serverRenderer());
+
+// Static resources should just be served as they are
+router.use(
+    express.static(path.resolve(__dirname, "..", "..", "build"), {
+        maxAge: "30d",
+    })
+);
+
+/**
+ * Ensures the front-end source and assets are still
+ * found if the user refreshes the page on a deep route:
+ * /book/com.mytoori.book.sample4
+ * If this route is not here the front-end assets are not found
+ */
+router.use("^(?!api$)", serverRenderer());
+
+export default router;
+```
+
+#### serverRenderer
+
+The last part is to render the Single Page Application and serve it. There is a lot going on in this file but it's not too complicated if we take it step by step.
+
+1. The initial request is triggered by the router (/)
+2. In the handler function, the data needed by the application is requested
+3. The index.html file from the static assets is read into memory
+4. The redux state is populated with the received network (i.e. API response) data
+5. The app is rendered (to String)
+    1. The react-router path is specified
+    2. The redux state is injected in the store
+6. The redux state is attached to a window object so React will have access to it on the client for the Hydrate stage
+7. The root div is replaced with the results from step 1 - 6 and sent to the client.
+
+```javascript
+// -- server/middleware/renderer.js
+
+import React from "react";
+import { renderToString } from "react-dom/server"; // renders react app to string
+import App from "../../src/components/App"; // The app itself
+import { StaticRouter, Route } from "react-router-dom"; // Static router instead of browser router
+import store from "../../src/store/store"; // the redux store
+import { Provider } from "react-redux"; // The redux provider
+
+// Normally these are available from the browser but since
+// this is not a browser environment they need to be added
+import serialize from "serialize-javascript";
+import fetch from "isomorphic-fetch";
+
+const path = require("path");
+const fs = require("fs");
+const filePath = path.resolve(__dirname, "..", "..", "build", "index.html");
+
+// reuse components from src
+// fetch the topics
+import { networkFetchCollection } from "../../src/actions/collectionActions";
+// fetch books for a given topic
+import { networkFetchBooks } from "../../src/actions/booksListActions";
+import { fetchBookData } from "../../src/actions/bookActions";
+import logger from "../logger";
+
+/**
+ * Takes the requested url and decides if
+ * book data should be provided based on that
+ * @param  {String}  url The url as a string
+ * @param {Object} logger The server logger to keep track of what's happening on the server
+ * @return {Array}   The array of book data objects
+ */
+const fetchBooksDataServer = async (url, logger) => {
+    logger.log({ level: "info", message: "fetching books data on server" });
+    let booksData = [];
+    if (/books\/+/.test(url)) {
+        const params = url.split("/") || [];
+        const collection = params.pop() || "featured";
+        booksData = await networkFetchBooks(collection, 10).catch(e =>
+            logger.log(`failed to fetch books ${e}`)
+        );
+    }
+    return booksData;
+};
+
+const fetchBookDataServer = async (url, logger) => {
+    logger.log({ level: "info", message: "fetch data for a book" });
+    let book = {};
+    if (/book\/+/.test(url)) {
+        const params = url.split("/") || [];
+        const bookId = params.pop();
+        book = await fetchBookData(bookId).catch(e =>
+            logger.log(`failed to fetch book ${e}`)
+        );
+    }
+    return book;
+};
+
+/**
+ * This is the initial request where the first request
+ * is directed to.
+ * From here the data is collected, the app rendered and then sent
+ * as fully rendered html to the client.
+ */
+const initialRequest = () => async (request, response) => {
+    const data = await networkFetchCollection().catch(e =>
+        logger.log(`failed to fetch topics ${e}`)
+    );
+
+    const booksData = await fetchBooksDataServer(request.url, logger);
+    const book = await fetchBookDataServer(request.url, logger);
+
+    // point to the html file created by CRA's build tool
+
+    fs.readFile(filePath, "utf8", (error, htmlData) => {
+        if (error) {
+            console.error("error", error); // eslint-disable-line
+            return response.status(404).end();
+        }
+
+        // Populate the redux object
+        const reduxState = store.getState();
+        reduxState.booksReducer.collections = data;
+        reduxState.booksReducer.books = booksData;
+        reduxState.booksReducer.selectedBook = book;
+
+        // render the app as a string
+        const html = renderToString(
+            <StaticRouter location={request.url} context={{}}>
+                <Provider store={store}>
+                    <Route path="/" component={App} />
+                </Provider>
+            </StaticRouter>
+        );
+
+        // The initial data is also needed on the client
+        // for the hydration step
+        const initialData = `
+                <script>
+                    window.__REDUX_INITIAL_DATA__ = ${serialize(reduxState)};
+                </script>`;
+
+        // inject the rendered app into index.html and send
+        return response.send(
+            htmlData.replace(
+                '<div id="root"></div>',
+                `<div id="root">${html}</div>${initialData}`
+            )
+        );
+    });
+};
+
+export default initialRequest;
+```
+
+### Hydrating
+
+Now that the client, web-crawler or web-browser, has the html it needs, the javascript bundle, app.js, is also downloaded. Why?
+
+The SPA can be read but is not interactive. If the user were to click an element with an `onClick` event nothing would happen.
+
+Once the javascript bundle has been downloaded, the hydrating step can take place. Effectively this makes the server rendered application **interactive** for the end-user.
+
+```javascript
+// --- index.js
+...
+
+const root = document.getElementById("root");
+root.hasChildNodes()
+    ? hydrate(<AppContainer />, root)
+    : render(<AppContainer />, root);
+
+```
+
+In the above case, hydrating only takes place if there are childNodes. This confirms that the initial render on the server went as expected and that the root now has child elements (with text).
+
+---
+
+## Generate new sitemap.xml
+
+With server side rendering in place the sitemap.xml generators can find all of the pages of the site. The generated file can then be fed (uploaded) to the webmaster pages of the popular search engines (Google, Bing, Yahoo, Yandex, etc.). This allows the crawlers to more easily index the site.
+
+# Summary
+
+All in all it took some time to get this setup properly. The benefits are definitely there though.
+
+Giwan
+
+---
+
+# Future updates / articles
+
+How to verify that server side rendering is indeed working (using various browsers), especially when service workers are in the mix.
+
+# Links
+
+[Rendering React **only** on the server](/react-instead-of-jsp/)
