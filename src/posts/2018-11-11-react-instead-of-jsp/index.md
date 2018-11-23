@@ -54,30 +54,30 @@ npm i --save express react react-dom express-react-views
 ```javascript
 // -- server.js
 
-const express = require("express");
-const app = express();
+const express = require("express")
+const app = express()
 
 // Set the view engine
 // indicate that template
 // files will end with "JSX"
-app.set("views", __dirname + "/views");
-app.set("view engine", "jsx");
-app.engine("jsx", require("express-react-views").createEngine());
+app.set("views", __dirname + "/views")
+app.set("view engine", "jsx")
+app.engine("jsx", require("express-react-views").createEngine())
 
 // This is where express can find it's static assets
-app.use(express.static("public"));
+app.use(express.static("public"))
 
 // Renders "index.jsx" on the route "/"
 // In addition the value "hello world" is passed
 // to the view as props
 app.get("/", (request, response) => {
-    response.render("index", { name: "hello world" });
-});
+    response.render("index", { name: "hello world" })
+})
 
 // listen for requests :)
 const listener = app.listen(9000, () => {
-    console.log(`Listening on port ${listener.address().port}`);
-});
+    console.log(`Listening on port ${listener.address().port}`)
+})
 ```
 
 Now that the server.js file has been setup to find our view file, the next step is to create the views.
@@ -100,21 +100,21 @@ Open the newly created index.jsx file to turn it into a react component that can
 ```javascript
 // -- index.jsx
 
-const React = require("react");
+const React = require("react")
 class HelloMessage extends React.Component {
     render() {
-        return <div>Hello {this.props.name} </div>;
+        return <div>Hello {this.props.name} </div>
     }
 }
 
-module.exports = HelloMessage;
+module.exports = HelloMessage
 ```
 
 The name of the component is ignored. The view is accessed through the file name.
 
 ```javascript
 // --highlight
-response.render("index", { name: "hello world" });
+response.render("index", { name: "hello world" })
 ```
 
 ---
@@ -128,3 +128,19 @@ node server.js
 ```
 
 The react component is rendered and the browser receives the html and css that is the output of that.
+
+---
+
+## Editable Example
+
+Check out this live example on glitch.com and try it out for yourself:
+
+<!-- Copy and Paste Me -->
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe
+    allow="geolocation; microphone; camera; midi; encrypted-media"
+    src="https://glitch.com/embed/#!/embed/node-express-react-view?path=views/index.jsx"
+    alt="node-express-react-view on Glitch"
+    style="height: 100%; width: 100%; border: 0;">
+  </iframe>
+</div>
