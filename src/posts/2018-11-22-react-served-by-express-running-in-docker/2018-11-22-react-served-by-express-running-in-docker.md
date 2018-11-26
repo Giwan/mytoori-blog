@@ -1,7 +1,7 @@
 ---
-path: "/react-served-by-express-running-in-docker"
+path: "/react-served-by-express-running-in-docker-container"
 date: "2018-11-22"
-title: "React front-end served by Express from Docker container"
+title: "React App Served by Express from Docker container"
 summary: "Moving to Docker requires special considerations for the front-end. The front-end should dynamically retrieve the backend endpoint. In the case of multiple environments, the same docker image could be re-used while moving from TST to ACC for example."
 image: ""
 author: "Giwan Persaud"
@@ -34,7 +34,7 @@ const App = () => <div>Hello World</div>
 render(<App />, document.getElementById("root"))
 ```
 
-Now we want this application to get dat from a TST backend.
+Now we want this application to get dat from a TST backend. With the following, the data is retrieved when the component is mounted.
 
 ```javascript
 // --- app.js
@@ -79,7 +79,7 @@ render(<App />, document.getElementById("root"))
 
 The above code uses the endpoint `/api/data` to get the data it needs. Effectively that means that if the front-end is running on `http://localhost:3000`, then the api request will got to `http://localhost:3000/api/data`. (Providing there is no proxying going on).
 
-In our case we would like the api request to go to a different host. The challenging part is that we do not know which host this is until later. In the case of a normal React application, one can use the environment variables available build time. These need to start with `REACT_APP_` after which you can add any variables you would like.
+In our case we would like the api request to go to a different host. The challenging part is that we do not know which host this is until later (at runtime). In the case of a "normal" React application, one can use the environment variables available at build time. These need to start with `REACT_APP_` after which you can add any variables you would like.
 
 So building the front-end production version would result in the apiHost populated correctly. These can be specified in our `.env` file where react would read them at build time.
 
@@ -90,7 +90,7 @@ So building the front-end production version would result in the apiHost populat
 REACT_APP_API_HOST=http://someremotehost.com
 ```
 
-Building the application with `npm run build` results in the remote host being inserted replacing REACT_APP_API_HOST where ever it's used.
+Building the application with `npm run build` results in the remote host being inserted replacing `REACT_APP_API_HOST` where ever it's used.
 
 ```javascript
 // --- app.js
@@ -161,3 +161,263 @@ While this is a workable solution, there are some downsides to this approach. Ou
 # Server Side Rendering to provide the API HOST
 
 Using server side rendering in the Docker container means that not only is the app rendered on the server before sending it to the client, it also has the opportunity to provide it the API HOST right away. This removes the need for an extra network call and initial data can also be loaded before sending the response to the client.
+
+First ensure the app expects the apiHost as a prop.
+
+```javascript
+// -- src/app.js
+
+import React, { Component } from "react"
+import "./App.css"
+
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+                <h1>Sample app testing dynamic backend</h1>
+                <div>Loaded backend host: {this.props.apiHost} </div>
+            </div>
+        )
+    }
+}
+
+export default App
+```
+
+[source: app.js](https://github.com/Giwan/fe-docker-dynamic-be/blob/ssr/src/App.js)
+
+Also during Hydration is the apiHost required. During the render step on the server it will become clear why the variable `__API_HOST__` is a global on the window object.
+
+```javascript
+// -- src/index.js
+
+import React from "react"
+import { render, hydrate } from "react-dom"
+import "./index.css"
+import App from "./App"
+
+const apiHost = window.__API_HOST__
+const root = document.getElementById("root")
+
+/**
+ * If childNodes exist, then server rendering
+ * happened and we only need to hydrate
+ */
+root.hasChildNodes()
+    ? hydrate(<App apiHost={apiHost} />, root)
+    : render(<App apiHost={apiHost} />, root)
+```
+
+[source: index.js](https://github.com/Giwan/fe-docker-dynamic-be/blob/ssr/src/index.js)
+
+## Server side rendering
+
+To setup server side rendering (SSR), create a folder named `server` in the root folder of the project. The render is divided into three files.
+
+1. server.js _(including required files for JSX and ES6 imports)_
+2. router.js _(routing to direct network requests)_
+3. renderer.js _(actuallly render the app on the server and respond to the client)_
+
+### Server.js
+
+```javascript
+// -- server/server.js
+
+/**
+ * (pre)Load the necessary libraries to ensure
+ * the react app can be built on the server.
+ * -- Normally these are loaded by webpack --
+ */
+require("ignore-styles")
+require("url-loader")
+require("file-loader")
+require("@babel/polyfill")
+require("@babel/register")({
+    presets: ["@babel/preset-env", "@babel/preset-react"],
+    plugins: [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-export-default-from",
+    ],
+})
+
+/** --- Now load the application as normal --- */
+
+const express = require("express")
+const router = require("./router")
+
+// Initiate App
+const app = express()
+const { PORT = 3000 } = process.env // default to 3000
+
+/**
+ * Tell the app to use the router imported above
+ */
+app.use(router)
+
+// start the express server and log what port it's running on
+app.listen(PORT, () => console.log(`running on http://localhost:${PORT}`))
+```
+
+[source: server.js](https://github.com/Giwan/fe-docker-dynamic-be/blob/ssr/server/server.js)
+
+### Router.js
+
+Next add the router.js file.
+
+```javascript
+// -- server/router.js
+
+// -- server/router.js
+
+const express = require("express")
+const path = require("path")
+const serverRenderer = require("./serverRenderer")
+
+/**
+ * Create the router object
+ */
+const router = express.Router()
+
+/**
+ * this route will not be used with serverside rendering
+ * working properly.
+ * However getting this route will require an additional
+ * request to be sent to the server.
+ */
+router.get("/environment.json", ({}, response) => {
+    response.json({
+        apiHost: "http://somehost.com",
+    })
+})
+
+// root (/) should always serve our server rendered page
+// serverRenderer will be disussed in the next section.
+router.use("^/$", serverRenderer())
+
+// Static assests should just be accessible
+router.use(
+    express.static(path.resolve(__dirname, "..", "build"), {
+        maxAge: "30d",
+    })
+)
+
+/**
+ * Ensures the front-end source and assets are still
+ * found if the user refreshes the page on a deep route:
+ * /book/com.mytoori.book.sample4
+ * If this route is not here the front-end assets are not found
+ */
+router.use("^(?!api$)", serverRenderer())
+
+module.exports = router
+```
+
+[source: router.js](https://github.com/Giwan/fe-docker-dynamic-be/blob/ssr/server/router.js)
+
+### Renderer.js
+
+Before the app is rendered, read the API_HOST environment variable from `process.env`.
+As part of the rendering step the API_HOST can be provided as a prop. The variable is also added to the HTML file so it can be picked up on the client and used during the Hydration step.
+
+```javascript
+// -- server/renderer.js
+
+const React = require("react")
+const { renderToString } = require("react-dom/server") // renders react app to string
+const fs = require("fs")
+const path = require("path")
+const { API_HOST = "http://fallbackapihost.com" } = process.env
+import App from "../src/App" // import the app that is going to be rendered on the server
+const indexFilePath = path.resolve(__dirname, "..", "build", "index.html")
+
+const serverRenderer = () => async ({}, response) => {
+    // read the public/index.html file into memory
+    // The rendered html string is then inserted
+    // and sent to the client
+    fs.readFile(indexFilePath, "utf8", (err, indexHTMLFile) => {
+        if (err) {
+            console.error("Failed to read index.html ", err)
+            return response.status(404).end()
+        }
+
+        // Render the entire React app to HTML string
+        const renderedHTML = renderToString(<App apiHost={API_HOST} />)
+
+        // Add (Global) variable with data to
+        // the client window object
+        const initialData = `
+            <script>
+                window.__API_HOST__ = "${API_HOST}"
+            </script>
+        `
+
+        return response.send(
+            indexHTMLFile.replace(
+                '<div id="root"></div>',
+                `<div id="root">${renderedHTML}</div>${initialData}`
+            )
+        )
+    })
+}
+
+module.exports = serverRenderer
+```
+
+[source: renderer.js](https://github.com/Giwan/fe-docker-dynamic-be/blob/ssr/server/serverRenderer.js)
+
+### Running in Docker
+
+The entire project can also be executed in a docker container. Copy the following to run the project in docker. It will build the project and run the start command when finished to start the project.
+
+```bash
+# Use the following image to build this docker image
+# This is pulled from docker.com and has everything
+# needed to run a node project
+FROM node:alpine
+
+# Back_env is set during build
+# telling the front-end which back-end
+# it should be talking to
+# ARG backend_env
+# ENV BACKEND_ENV $backend_env
+ENV PORT 3000
+
+# Navigate (cd) to the app folder in the docker container
+WORKDIR /usr/src/app
+
+# Copy all package.json / package-lock.json etc. to the root folder
+# this is executed on build: docker build .
+COPY ./package*.json ./
+
+RUN npm install
+
+# copy everything from the external directory to the container folder in docker
+COPY . .
+
+# build the front-end with react build scripts and store them in the build folder
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start:prod"]
+```
+
+#### starting up
+
+The start:prod command initiates the node process with the server/server.js file.
+
+```json
+"start:prod": "NODE_ENV=production node ./server/server.js",
+```
+
+To test outside of Docker, simply run `npm run start:prod` from the terminal.
+
+While running the docker container the api host is provided as a environment variable. That is then read when rendering the app on the server.
+
+```bash
+# build docker
+docker build -t mydockercontainer .
+
+# run docker container with environment variable
+docker run -e "API_HOST=https://dockerruntimeapihost.com" -p 3000:3000 mydockercontainer
+```
