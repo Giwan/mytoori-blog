@@ -1,16 +1,9 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/layout";
-import Menu from "../components/menu";
-import PostItem from "../components/postItem";
-
-import { spacing } from "../components/style";
-
-const listStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gridGap: spacing.default,
-};
+import React from "react"
+import { graphql } from "gatsby"
+import Layout from "../components/layout"
+import Menu from "../components/menu"
+import PostItem from "../components/postItem"
+import "../style/index.css"
 
 const Index = ({
     data: {
@@ -19,16 +12,16 @@ const Index = ({
 }) => {
     const Posts = edges.map(({ node }) => (
         <PostItem key={node.id} node={node} />
-    ));
+    ))
     return (
         <Layout>
             <Menu />
-            <div style={listStyle}>{Posts}</div>
+            <div className="mb-posts__container">{Posts}</div>
         </Layout>
-    );
-};
+    )
+}
 
-export default Index;
+export default Index
 
 export const pageQuery = graphql`
     query {
@@ -48,4 +41,4 @@ export const pageQuery = graphql`
             }
         }
     }
-`;
+`
