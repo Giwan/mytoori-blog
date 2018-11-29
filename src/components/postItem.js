@@ -1,46 +1,62 @@
-import React from "react";
-import { spacing, colors } from "../components/style";
-import { showLongDate } from "../config/helpers";
+import React from "react"
+import { spacing, colors } from "../components/style"
+import { showLongDate } from "../config/helpers"
 
 const listItemStyle = {
-    backgroundColor: colors.primary,
-    color: colors.primaryLight,
+    color: colors.primary,
+    // backgroundColor: "#3dd9b4",
+    // backgroundColor: colors.primary,
+    // backgroundColor: "slategray",
+    // backgroundColor: "#16a085",
     display: "inline-block",
-    border: `2px solid ${colors.primary}`,
+    // border: `5px solid slategray`,
     width: "100%",
-    padding: spacing.default,
+    height: "100%",
+    // padding: spacing.default,
     marginBottom: spacing.default,
 
-    title: {},
+    title: {
+        color: colors.primary,
+    },
 
     date: {
         textAlign: "right",
         fontSize: "0.8em",
         marginBottom: spacing.default,
-        borderBottom: `1px solid ${colors.primaryLight}`,
+        borderBottom: `10px solid lightgray`,
+        fontFamily: "Helvetica",
+        textTransform: "uppercase",
+        color: colors.primary,
     },
-};
+    summary: {
+        color: colors.primary,
+        fontSize: "1.2em",
+        lineHeight: "1.42em",
+    },
+}
 
 const PostItem = ({ node }) => {
     return (
         <a href={node.frontmatter.path}>
             <div style={listItemStyle}>
-                <img
+                {/* <img
                     src={node.frontmatter.image}
                     alt={node.frontmatter.image}
-                />
+                /> */}
 
                 <h1 style={listItemStyle.title}>{node.frontmatter.title}</h1>
                 <div style={listItemStyle.date}>
                     {showLongDate(node.frontmatter.date)}
                 </div>
-                <div>{node.frontmatter.summary}</div>
+                <div style={listItemStyle.summary}>
+                    {node.frontmatter.summary}
+                </div>
             </div>
         </a>
-    );
-};
+    )
+}
 
-export default PostItem;
+export default PostItem
 
 /*
 

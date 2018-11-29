@@ -7,8 +7,10 @@ html {
 }
 body {
     margin: 0;
-    background-color: #eeeeee;
+    background-color: mistyrose;
     /* background-color: #212121; */
+    /* background-color: #3dd9b4; */
+    /* background-color: #fef4a9; */
     color: hsla(0, 0%, 0%, 0.8);
     /* color: white; */
     font-family: georgia, serif;

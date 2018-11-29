@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "gatsby";
-import { colors, font } from "./style";
+import React from "react"
+import { Link } from "gatsby"
+import { colors, font } from "./style"
 
 const Header = ({ siteTitle }) => (
     <div
         style={{
             background: "transparent",
-            marginBottom: "1.45rem",
+            // marginBottom: "1.45rem",
         }}
     >
         <div
@@ -14,6 +14,7 @@ const Header = ({ siteTitle }) => (
                 margin: "0 auto",
                 maxWidth: 960,
                 padding: "1.45rem 1.0875rem",
+                paddingBottom: 0,
             }}
         >
             <h1 style={{ margin: 0 }}>
@@ -30,6 +31,6 @@ const Header = ({ siteTitle }) => (
             </h1>
         </div>
     </div>
-);
+)
 
-export default Header;
+export default Header

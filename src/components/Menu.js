@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "gatsby";
-import { colors, font, spacing } from "./style";
+import React from "react"
+import { Link } from "gatsby"
+import { colors, font, spacing } from "./style"
 
 const menuStyle = {
-    borderBottom: `8px solid ${colors.primary}`,
+    borderBottom: `20px solid lightgray`,
     textAlign: "right",
-    marginBottom: spacing.default,
+    marginBottom: spacing.default * 2,
 
     link: {
         textTransform: "uppercase",
@@ -14,7 +14,7 @@ const menuStyle = {
         fontFamily: font.family,
         fontWeight: 700,
     },
-};
+}
 
 const Menu = () => (
     <nav style={menuStyle}>
@@ -22,6 +22,6 @@ const Menu = () => (
             About
         </Link>
     </nav>
-);
+)
 
-export default Menu;
+export default Menu
