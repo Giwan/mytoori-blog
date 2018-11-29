@@ -13,10 +13,14 @@ const listItemStyle = {
     width: "100%",
     height: "100%",
     // padding: spacing.default,
-    marginBottom: spacing.default,
+    marginBottom: spacing.default * 4,
 
     title: {
         color: colors.primary,
+    },
+
+    link: {
+        textDecoration: "none",
     },
 
     date: {
@@ -37,8 +41,8 @@ const listItemStyle = {
 
 const PostItem = ({ node }) => {
     return (
-        <a href={node.frontmatter.path}>
-            <div style={listItemStyle}>
+        <div style={listItemStyle}>
+            <a href={node.frontmatter.path} style={listItemStyle.link}>
                 {/* <img
                     src={node.frontmatter.image}
                     alt={node.frontmatter.image}
@@ -51,8 +55,8 @@ const PostItem = ({ node }) => {
                 <div style={listItemStyle.summary}>
                     {node.frontmatter.summary}
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     )
 }
 

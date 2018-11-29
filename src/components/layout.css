@@ -643,7 +643,7 @@ pre tt:after {
 } */
 
 .gatsby-highlight {
-    background-color: rgb(25, 25, 25);
+    background-color: #3e4654; /*  rgb(25, 25, 25); */
     color: #fefefe;
     margin: 1em 0;
     padding: 1em;
