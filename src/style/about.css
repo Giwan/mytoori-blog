@@ -1,0 +1,7 @@
+@import "variables.css";
+
+.mb-about__container {
+    /* padding: var(--spacing-default); */
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-default);
+}
