@@ -7,12 +7,12 @@ image: ""
 author: "Giwan Persaud"
 ---
 
-Once a Docker container has been built the static assets can no longer be changed. That would require a new build.
-When the front-end code is running in a docker container it will very likely want to get it's data from a back-end service. If that service is running on the same host, request and simply be pointed to `/api/xyz`.
+Once a Docker container is built the static assets can no longer change. That would require a new build.
+When the front-end code is running in a docker container it will very likely want to get its data from a back-end service. If that service is running on the same host, requests can simply be pointed to `/api/xyz`. Since no domain host is specified, the domain of the client is used. 
 
 ## Data from third-party services
 
-However if the front-end needs data from third-party services, which are **not on the same host**, things get more complicated. If the third-party host can be injected at build time, it's fine. However the case below is when you want to specify the third-party host at **runtime**.
+If the front-end needs data from third-party services, which are **not on the same host**, things get more complicated. If the third-party host can be injected at build time, it's fine. The case below is when you want to specify the third-party host at **runtime**.
 
 ## Technology stack
 
@@ -21,7 +21,7 @@ However if the front-end needs data from third-party services, which are **not o
 -   Express
 -   React --> static assets (html, css, javascript)
 
-Imagine we have a very simple react application.
+Imagine a very simple react application.
 
 ```javascript
 // --- app.js
@@ -34,7 +34,7 @@ const App = () => <div>Hello World</div>
 render(<App />, document.getElementById("root"))
 ```
 
-Now we want this application to get dat from a TST backend. With the following, the data is retrieved when the component is mounted.
+This app gets its data from a TST backend. Data is retrieved when the component is mounted.
 
 ```javascript
 // --- app.js
@@ -52,7 +52,7 @@ class App extends React.Component {
     }
 
     /**
-     * When the component is mounted,
+     * When the component mounts,
      * fetch the data from the network
      */
     async componentDidMount() {
@@ -77,11 +77,11 @@ class App extends React.Component {
 render(<App />, document.getElementById("root"))
 ```
 
-The above code uses the endpoint `/api/data` to get the data it needs. Effectively that means that if the front-end is running on `http://localhost:3000`, then the api request will got to `http://localhost:3000/api/data`. (Providing there is no proxying going on).
+The above code uses the endpoint `/api/data` to get the data it needs. If the front-end is running on `http://localhost:3000`, then the api request will got to `http://localhost:3000/api/data`. (Providing there is no proxy configured).
 
 In our case we would like the api request to go to a different host. The challenging part is that we do not know which host this is until later (at runtime). In the case of a "normal" React application, one can use the environment variables available at build time. These need to start with `REACT_APP_` after which you can add any variables you would like.
 
-So building the front-end production version would result in the apiHost populated correctly. These can be specified in our `.env` file where react would read them at build time.
+So building the front-end production version would result in the apiHost populated correctly. These can be specified in local `.env` file where react would read them at build time.
 
 ```bash
 
@@ -90,7 +90,7 @@ So building the front-end production version would result in the apiHost populat
 REACT_APP_API_HOST=http://someremotehost.com
 ```
 
-Building the application with `npm run build` results in the remote host being inserted replacing `REACT_APP_API_HOST` where ever it's used.
+Build the application with `npm run build`.  The remote host is inserted, replacing `REACT_APP_API_HOST` where ever it's used.
 
 ```javascript
 // --- app.js
@@ -139,8 +139,8 @@ render(<App />, document.getElementById("root"))
 
 ## Running in Docker
 
-When running in Docker, there is another layer of complexity. The idea of a Docker image is build it once and run it in various places. In the case of our front-end we might want to re-use our docker image for TST on ACC and eventually on PRD.
-The issue there is that once the Docker image has been built, it's much harder to inject dynamic variables such as our apiHost.
+When running in Docker, there is another layer of complexity. The idea of a Docker image is build it once and run it in various places. In the case of our front-end, we want to re-use our docker image for TST on ACC and eventually, PRD.
+The issue there is that once the Docker image is built, it's much harder to inject dynamic variables such as our apiHost.
 
 To run our front-end in Docker, a server is created in the Docker container anyway. That server can be used to provide the **apiHost** to the front-end. A node / express server will help us with this. When starting the Docker container, environment variables are provided at run time. Docker container receives and passes the environment variables on to the express server, which then provides that variable to the front-end.
 
@@ -156,11 +156,11 @@ docker run -e "API_HOST=https://mydockerdynamichost.com" -p 3000:3000 mydockerim
 
 > [The complete source on github](https://github.com/Giwan/fe-docker-dynamic-be)
 
-While this is a workable solution, there are some downsides to this approach. Our front-end has to request the host before it can make any actual data request. Network latency means that our application is slower because of this solution. In the next part we will look at a solution that will allow us to use server side rendering to address this issue better.
+While this is a workable solution, there are some downsides to this approach. The front-end has to request the host before it can make any actual data request. Network latency means that our application is slower because of this solution. In the next part we will look at a solution that will allow us to use server side rendering to address this issue better.
 
 # Server Side Rendering to provide the API HOST
 
-Using server side rendering in the Docker container means that not only is the app rendered on the server before sending it to the client, it also has the opportunity to provide it the API HOST right away. This removes the need for an extra network call and initial data can also be loaded before sending the response to the client.
+Using server side rendering in the Docker container means that not only is the app rendered on the server before sending it to the client. It also has the opportunity to provide the API HOST right away. This removes the need for an extra network call. Initial data can also be loaded before sending the response to the client.
 
 First ensure the app expects the apiHost as a prop.
 
@@ -216,7 +216,7 @@ To setup server side rendering (SSR), create a folder named `server` in the root
 
 1. server.js _(including required files for JSX and ES6 imports)_
 2. router.js _(routing to direct network requests)_
-3. renderer.js _(actuallly render the app on the server and respond to the client)_
+3. renderer.js _(actually render the app on the server and respond to the client)_
 
 ### Server.js
 
@@ -291,10 +291,10 @@ router.get("/environment.json", ({}, response) => {
 })
 
 // root (/) should always serve our server rendered page
-// serverRenderer will be disussed in the next section.
+// serverRenderer will be discussed in the next section.
 router.use("^/$", serverRenderer())
 
-// Static assests should just be accessible
+// Static assets should just be accessible
 router.use(
     express.static(path.resolve(__dirname, "..", "build"), {
         maxAge: "30d",
@@ -412,7 +412,7 @@ The start:prod command initiates the node process with the server/server.js file
 
 To test outside of Docker, simply run `npm run start:prod` from the terminal.
 
-While running the docker container the api host is provided as a environment variable. That is then read when rendering the app on the server.
+While running the docker container the api host is provided as an environment variable. That is then read when rendering the app on the server.
 
 ```bash
 # build docker
