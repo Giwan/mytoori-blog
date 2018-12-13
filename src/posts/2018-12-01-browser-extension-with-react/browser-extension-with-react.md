@@ -95,13 +95,12 @@ In the file navigator, find the directory where the project code resides. Add it
 
 # Render popup window with React
 
-Instead of writing pure html in `popup.html` it would be better if we can write our code in react and render popup.html as the final output. Why is that better? React allows us to build our app with **components** this means that we can re-use standard react components. Essentailly this means it's easier to build more complex extensions, hopefully adding more value to the user while improving the developer experience.
+Instead of writing pure html in `popup.html` it would be better if we can write our code in react and render popup.html as the final output. Why is that better? React allows us to build our app with **components** this means that we can re-use standard react components. Essentially this means it's easier to build more complex extensions, hopefully adding more value to the user while improving the developer experience.
 
 ## No create-react-app but custom webpack.config.js
 
-Normally when creating a new react project, reaching for create-react-app is the easiest option. However in this case different output files are needed. This means customizing the webpack configuration file. To keep this light, a basic version of webpack.config.js will be created.
+Normally when creating a new react project, reaching for create-react-app is the easiest option. However in this case different output files are needed. This means customising the webpack configuration file. To keep this light, a basic version of webpack.config.js will be created.
 
 ### webpack
-Create-react-app uses webpack under the hood. Since we are going to create our own webpack config, it's worthwhile to build this up gradually. First webpack will be used to simply bundle all the resources without using react just yet. 
 
-
+Create-react-app uses webpack under the hood. Since we are going to create our own webpack config, it's worthwhile to build this up gradually. First webpack will be used to simply bundle all the resources without using react just yet.

@@ -2,7 +2,7 @@
 path: "/server-side-rendering-with-react"
 date: "2018-11-11"
 title: "Server side rendering with React and NodeJS"
-summary: "Web crawlwers can't parse JS which means that Single Page Applications need to render on the server if they want to be indexed by the search engines."
+summary: "Web crawlers can't parse JS which means that Single Page Applications need to render on the server if they want to be indexed by the search engines."
 image: ""
 author: "Giwan Persaud"
 ---
@@ -39,7 +39,7 @@ There is not much here for a web crawler to work with. All the content of the ap
 
 ## Server side rendering
 
-With server side rendering (SSR), the Single Page Application is is first fully rendered on the server before it's sent to the client. All of the HTML content is sent in that first request just as it would be with a statically rendered site. The client can skip the javascript rendering step and simpley "display" the received HTML to the user.
+With server side rendering (SSR), the Single Page Application is is first fully rendered on the server before it's sent to the client. All of the HTML content is sent in that first request just as it would be with a statically rendered site. The client can skip the javascript rendering step and simply "display" the received HTML to the user.
 
 ### Create the Server
 
@@ -119,7 +119,7 @@ import serverRenderer from "../renderer"
 const router = express.Router()
 
 // root (/) should always serve our server rendered page
-// serverRenderer will be disussed in the next section.
+// serverRenderer will be discussed in the next section.
 router.use("^/$", serverRenderer())
 
 // Static resources should just be served as they are

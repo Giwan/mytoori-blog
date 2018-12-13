@@ -7,7 +7,7 @@ image: ""
 author: "Giwan Persaud"
 ---
 
-To be honest I'm getting a bit frustrated with Google's search. Often I will type in a couple of words and it will choose to ommit one of those words completely. This is ofcourse relatively easy to fix but why do I need to fix it in the first place? (Btw, the fix is to surround the word you want with double quotes).
+To be honest I'm getting a bit frustrated with Google's search. Often I will type in a couple of words and it will choose to omit one of those words completely. This is relatively easy to fix but why do I need to fix it in the first place? (Btw, the fix is to surround the word you want with double quotes).
 
 So to solve the issue, I thought to create a list of advanced searching techniques so that my search results can start to be more effective again.
 
@@ -17,7 +17,7 @@ So first off I thought that [google advanced search](https://support.google.com/
 
 ### multiple site specific searches
 
-Already knowing a few sites that often come up with good results you can search accross these sites only to avoid the messy ones.
+Already knowing a few sites that often come up with good results you can search across these sites only to avoid the messy ones.
 
 ```google
 

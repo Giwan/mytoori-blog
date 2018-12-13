@@ -8,7 +8,7 @@ author: "Giwan Persaud"
 ---
 
 Once a Docker container is built the static assets can no longer change. That would require a new build.
-When the front-end code is running in a docker container it will very likely want to get its data from a back-end service. If that service is running on the same host, requests can simply be pointed to `/api/xyz`. Since no domain host is specified, the domain of the client is used. 
+When the front-end code is running in a docker container it will very likely want to get its data from a back-end service. If that service is running on the same host, requests can simply be pointed to `/api/xyz`. Since no domain host is specified, the domain of the client is used.
 
 ## Data from third-party services
 
@@ -90,7 +90,7 @@ So building the front-end production version would result in the apiHost populat
 REACT_APP_API_HOST=http://someremotehost.com
 ```
 
-Build the application with `npm run build`.  The remote host is inserted, replacing `REACT_APP_API_HOST` where ever it's used.
+Build the application with `npm run build`. The remote host is inserted, replacing `REACT_APP_API_HOST` where ever it's used.
 
 ```javascript
 // --- app.js
@@ -279,8 +279,8 @@ const serverRenderer = require("./serverRenderer")
 const router = express.Router()
 
 /**
- * this route will not be used with serverside rendering
- * working properly.
+ * this route will not be used if server side rendering
+ * works properly.
  * However getting this route will require an additional
  * request to be sent to the server.
  */
