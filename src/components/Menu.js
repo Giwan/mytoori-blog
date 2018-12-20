@@ -13,6 +13,7 @@ const menuStyle = {
         color: colors.primary,
         fontFamily: font.family,
         fontWeight: 700,
+        marginLeft: spacing.default,
     },
 }
 
@@ -20,6 +21,9 @@ const Menu = () => (
     <nav style={menuStyle}>
         <Link style={menuStyle.link} to="/about">
             About
+        </Link>
+        <Link style={menuStyle.link} to="/tools">
+            Tools
         </Link>
     </nav>
 )

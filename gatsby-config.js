@@ -1,60 +1,109 @@
-module.exports = {
-    siteMetadata: {
-        title: "Mytoori blog",
-        author: "Giwan Persaud",
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+
+const siteMetadata = {
+    title: "Mytoori blog",
+    author: "Giwan Persaud",
+}
+
+/**
+ * Access the file system
+ * and read markdown pages.
+ */
+const sourceFileSystem = {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+        path: `${__dirname}/src/posts`,
+        name: "markdown-pages",
     },
+}
+
+/**
+ * Used to read markdown files and transform
+ * them properly
+ */
+const transformerRemark = {
+    resolve: `gatsby-transformer-remark`,
+    options: {
+        plugins: [
+            {
+                resolve: `gatsby-remark-prismjs`,
+                options: {
+                    classPrefix: null,
+                    showLineNumbers: false,
+                },
+            },
+        ],
+    },
+}
+
+const googleAnalytics = {
+    resolve: `gatsby-plugin-google-analytics`,
+    options: {
+        trackingId: "UA-75146522-4",
+    },
+}
+
+/**
+ * Read images from the file system
+ */
+const sourceFilesystem = {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+    },
+}
+
+/**
+ * Creates a manifest file for PWA
+ */
+const pluginManifest = {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+        name: "gatsby-starter-default",
+        short_name: "starter",
+        start_url: "/",
+        background_color: "#fefefe",
+        theme_color: "#212121",
+        display: "minimal-ui",
+        icon: "src/images/mytoori-news.svg", // This path is relative to the root of the site.
+    },
+}
+
+/**
+ * connects to airtable data
+ * api key is in env file
+ */
+const airtable = {
+    resolve: `gatsby-source-airtable`,
+    options: {
+        //apiKey: '',
+        tables: [
+            {
+                baseId: `appf6MprYAuGlDoah`,
+                tableName: `All`,
+                tableView: `JAM`,
+            },
+        ],
+    },
+}
+
+module.exports = {
+    siteMetadata,
     plugins: [
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                path: `${__dirname}/src/posts`,
-                name: "markdown-pages",
-            },
-        },
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [
-                    {
-                        resolve: `gatsby-remark-prismjs`,
-                        options: {
-                            classPrefix: null,
-                            showLineNumbers: false,
-                        },
-                    },
-                ],
-            },
-        },
+        sourceFileSystem,
+        transformerRemark,
+        googleAnalytics,
         "gatsby-plugin-react-helmet",
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `images`,
-                path: `${__dirname}/src/images`,
-            },
-        },
         "gatsby-transformer-sharp",
         "gatsby-plugin-sharp",
-        {
-            resolve: `gatsby-plugin-manifest`,
-            options: {
-                name: "gatsby-starter-default",
-                short_name: "starter",
-                start_url: "/",
-                background_color: "#fefefe",
-                theme_color: "#212121",
-                display: "minimal-ui",
-                icon: "src/images/mytoori-news.svg", // This path is relative to the root of the site.
-            },
-        },
-        {
-            resolve: `gatsby-plugin-google-analytics`,
-            options: {
-                trackingId: "UA-75146522-4",
-            },
-        },
+        pluginManifest,
+        sourceFilesystem,
+        airtable,
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
     ],
-};
+}
