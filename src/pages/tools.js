@@ -3,35 +3,45 @@ import React from "react"
 import Menu from "../components/menu"
 import Layout from "../components/layout"
 import { StaticQuery, graphql } from "gatsby"
+import "../style/tools.css"
 
-const ToolsPage = () => (
-    <StaticQuery
-        query={graphql`
-            {
-                allAirtable {
-                    edges {
-                        node {
-                            data {
-                                Name
-                                Description
-                            }
-                        }
+const ToolsPageRender = ({ allAirtable: { edges } }) => (
+    <Layout>
+        <Menu />
+        <h1>Recommended tools</h1>
+        <p>A list of good tools for various tasks.</p>
+        <div className="mb-tools-list__container">
+            {edges.map(({ node: { data } }, i) => (
+                <div key={data.Name + i}>
+                    <a
+                        href={`https://${data.Name}`}
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <h3>{data.Name}</h3>
+                    </a>
+                    <p>{data.Description}</p>
+                </div>
+            ))}
+        </div>
+    </Layout>
+)
+
+const query = graphql`
+    {
+        allAirtable {
+            edges {
+                node {
+                    data {
+                        Name
+                        Description
                     }
                 }
             }
-        `}
-        render={({ allAirtable: { edges } }) => (
-            <Layout>
-                <Menu />
-                <h1>Recommended front-end tools</h1>
-                <div>
-                    {edges.map(({ node: { data } }, i) => (
-                        <div key={data.Name + i}>{data.Name}</div>
-                    ))}
-                </div>
-            </Layout>
-        )}
-    />
-)
+        }
+    }
+`
+
+const ToolsPage = () => <StaticQuery query={query} render={ToolsPageRender} />
 
 export default ToolsPage

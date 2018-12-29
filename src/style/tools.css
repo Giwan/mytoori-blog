@@ -1,0 +1,36 @@
+@import "./variables.css";
+
+h1 {
+    color: var(--color-primary);
+}
+
+.mb-tools-list__container a {
+    color: var(--color-primary);
+}
+
+.mb-tools-list__container div {
+    background-color: white;
+    padding: var(--spacing-default);
+}
+
+@media (min-width: 600px) {
+    .mb-tools-list__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(250px, auto);
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 800px) {
+    .mb-tools-list__container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(250px, auto);
+        max-width: 100%;
+    }
+
+    .mb-tools-list__container div:nth-child(even) {
+        background-color: lightgray;
+    }
+}
