@@ -16,7 +16,7 @@ const ToolsPageRender = ({ allAirtable: { edges } }) => (
                     <a
                         href={`https://${data.Name}`}
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                     >
                         <h3>{data.Name}</h3>
                     </a>
