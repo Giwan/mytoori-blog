@@ -3,10 +3,11 @@ path: "/vscode-debugging"
 date: "2018-01-05"
 author: "Giwan Persaud"
 title: "Debugging with Visual Studio Code"
-summary: "A short article on how debugging works with visual studio code. It's especially useful when debugging server side projects like NodeJS."
 image: ""
+published: true
 ---
 
+A short article on how debugging works with visual studio code. It's especially useful when debugging server side projects like NodeJS.
 VSCode has this nifty feature that allows breakpoints to be set in the editor while building the front-end in the chrome browser.
 
 Before getting started, you'll need to install the `debugger for Chrome` extension

@@ -4,12 +4,12 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const path = require("path");
+const path = require("path")
 
 exports.createPages = ({ actions, graphql }) => {
-    const { createPage } = actions;
+    const { createPage } = actions
 
-    const blogPostTemplate = path.resolve(`src/templates/blogTemplate.js`);
+    const blogPostTemplate = path.resolve(`src/templates/blogTemplate.js`)
 
     return graphql(`
         {
@@ -25,6 +25,7 @@ exports.createPages = ({ actions, graphql }) => {
                             date
                             summary
                             image
+                            published
                         }
                     }
                 }
@@ -32,7 +33,7 @@ exports.createPages = ({ actions, graphql }) => {
         }
     `).then(result => {
         if (result.errors) {
-            return Promise.reject(result.errors);
+            return Promise.reject(result.errors)
         }
 
         result.data.allMarkdownRemark.edges.forEach(({ node }) => {
@@ -40,7 +41,7 @@ exports.createPages = ({ actions, graphql }) => {
                 path: node.frontmatter.path,
                 component: blogPostTemplate,
                 context: {}, // additional data can be passed via context
-            });
-        });
-    });
-};
+            })
+        })
+    })
+}

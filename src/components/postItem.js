@@ -53,7 +53,8 @@ const PostItem = ({ node }) => {
                     {showLongDate(node.frontmatter.date)}
                 </div>
                 <div style={listItemStyle.summary}>
-                    {node.frontmatter.summary}
+                    {/* {node.frontmatter.summary} */}
+                    {node.excerpt}
                 </div>
             </a>
         </div>

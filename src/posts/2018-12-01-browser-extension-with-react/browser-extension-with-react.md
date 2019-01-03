@@ -2,13 +2,14 @@
 path: "/browser-extension-with-react"
 date: "2018-12-01"
 title: "A chrome extension built with ReactJS"
-summary: "React can also be used when developing chrome browser extensions. This post goes into the details of creating such an extension."
 image: ""
 author: "Giwan Persaud"
+published: false
 ---
 
 # Chrome extension with React
 
+React can also be used when developing chrome browser extensions. This post goes into the details of creating such an extension.
 After building a news reader with React, I was tasked with building a Chrome extension. Naturally I wanted to use React for this as well. The extension was a companion app to the news reader built before. It made sense to re-use some of the components created in the newsreader app allowing for faster development.
 
 **Requirements**

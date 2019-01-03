@@ -5,6 +5,7 @@ title: "Server side rendering with React and NodeJS"
 summary: "Web crawlers can't parse JS which means that Single Page Applications need to render on the server if they want to be indexed by the search engines."
 image: ""
 author: "Giwan Persaud"
+published: true
 ---
 
 Mytoori.com's front-end is built with React as a single page application (SPA). Typically these do not play nice with web crawlers from google or bing. This can be seen in the network tab of dev tools. The first response would look like this.

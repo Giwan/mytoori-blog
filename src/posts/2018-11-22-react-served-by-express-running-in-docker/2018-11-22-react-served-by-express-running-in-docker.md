@@ -2,11 +2,12 @@
 path: "/react-served-by-express-running-in-docker-container"
 date: "2018-11-22"
 title: "React App Served by Express from Docker container"
-summary: "Moving to Docker requires special considerations for the front-end. The front-end should dynamically retrieve the backend endpoint. In the case of multiple environments, the same docker image could be re-used while moving from TST to ACC for example."
 image: ""
 author: "Giwan Persaud"
+published: true
 ---
 
+Moving to Docker requires special considerations for the front-end. The front-end should dynamically retrieve the backend endpoint. In the case of multiple environments, the same docker image could be re-used while moving from TST to ACC for example.
 Once a Docker container is built the static assets can no longer change. That would require a new build.
 When the front-end code is running in a docker container it will very likely want to get its data from a back-end service. If that service is running on the same host, requests can simply be pointed to `/api/xyz`. Since no domain host is specified, the domain of the client is used.
 

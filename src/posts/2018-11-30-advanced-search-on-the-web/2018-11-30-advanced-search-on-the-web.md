@@ -2,11 +2,12 @@
 path: "/advanced-internet-search"
 date: "2018-11-30"
 title: "Advanced Search on the internet"
-summary: "With so many click bait articles showing up on the web, I'm kind of getting sick of it. Here are some strategies for proper searching the web for true quality articles"
 image: ""
 author: "Giwan Persaud"
+published: false
 ---
 
+With so many click bait articles showing up on the web, I'm kind of getting sick of it. Here are some strategies for proper searching the web for true quality articles
 To be honest I'm getting a bit frustrated with Google's search. Often I will type in a couple of words and it will choose to omit one of those words completely. This is relatively easy to fix but why do I need to fix it in the first place? (Btw, the fix is to surround the word you want with double quotes).
 
 So to solve the issue, I thought to create a list of advanced searching techniques so that my search results can start to be more effective again.

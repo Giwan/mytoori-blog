@@ -25,9 +25,14 @@ export default Index
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(
+            filter: { frontmatter: { published: { eq: true } } }
+            sort: { fields: [frontmatter___date], order: DESC }
+            limit: 1000
+        ) {
             edges {
                 node {
+                    excerpt(pruneLength: 250)
                     id
                     frontmatter {
                         path

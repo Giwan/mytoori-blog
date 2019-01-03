@@ -5,6 +5,7 @@ title: "Free static site"
 summary: "How to create and host a static site, including SSL and domain name for 0 euros! Static sites can be hosted for free thanks to some amazing services available as of 2018. "
 image: ""
 author: "Giwan Persaud"
+published: true
 ---
 
 Setting up a free static site is completely possible. Naturally if your site grows and needs more resources, those are likely to cost some money.
