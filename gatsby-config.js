@@ -68,7 +68,7 @@ const pluginManifest = {
         background_color: "#fefefe",
         theme_color: "#212121",
         display: "minimal-ui",
-        icon: "src/images/mytoori-news.svg", // This path is relative to the root of the site.
+        icon: "src/images/favicon.svg", // This path is relative to the root of the site.
     },
 }
 
