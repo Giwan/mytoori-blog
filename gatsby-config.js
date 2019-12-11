@@ -72,24 +72,6 @@ const pluginManifest = {
     },
 }
 
-/**
- * connects to airtable data
- * api key is in env file
- */
-const airtable = {
-    resolve: `gatsby-source-airtable`,
-    options: {
-        //apiKey: '',
-        tables: [
-            {
-                baseId: `appf6MprYAuGlDoah`,
-                tableName: `All`,
-                tableView: `JAM`,
-            },
-        ],
-    },
-}
-
 module.exports = {
     siteMetadata,
     plugins: [
@@ -101,7 +83,6 @@ module.exports = {
         "gatsby-plugin-sharp",
         pluginManifest,
         sourceFilesystem,
-        airtable,
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
