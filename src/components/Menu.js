@@ -22,9 +22,6 @@ const Menu = () => (
         <Link style={menuStyle.link} to="/about">
             About
         </Link>
-        <Link style={menuStyle.link} to="/tools">
-            Tools
-        </Link>
     </nav>
 )
 

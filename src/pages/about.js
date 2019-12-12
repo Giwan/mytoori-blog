@@ -9,10 +9,7 @@ const AboutPage = () => {
 
             <div className="mb-about__container">
                 <h1>Giwan Persaud</h1>
-                <p>
-                    Just my corner of the web where I share knowledge and tools
-                    I'm excited about.
-                </p>
+                <p>Just my corner of the web where I write about tech.</p>
                 <p>
                     As a front-end developer I try to keep learning all the
                     time. When I picked up React at the end of 2015 I really
