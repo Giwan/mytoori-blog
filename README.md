@@ -25,3 +25,9 @@ The easiest way to get started with a new post is to copy one of the existing on
 
 -   Static sites
 -   Wordpress (ACF)
+-   Typescript (jQuery?)
+-   Typescript (demo)
+-   WebAssembly
+-   Svelte
+-   CSS Grid
+-   Flex box
