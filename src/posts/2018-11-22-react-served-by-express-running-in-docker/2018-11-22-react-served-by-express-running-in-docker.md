@@ -1,5 +1,5 @@
 ---
-path: "/react-served-by-express-running-in-docker-container"
+path: "/react-served-by-express-running-in-docker-container/"
 date: "2018-11-22"
 title: "React App Served by Express from Docker container"
 image: ""

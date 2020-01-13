@@ -1,5 +1,5 @@
 ---
-path: "/browser-extension-with-react"
+path: "/browser-extension-with-react/"
 date: "2018-12-01"
 title: "A chrome extension built with ReactJS"
 image: ""

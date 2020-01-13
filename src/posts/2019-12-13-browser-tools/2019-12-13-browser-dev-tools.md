@@ -1,5 +1,5 @@
 ---
-path: "/node-screenshots"
+path: "/browser-dev-tools"
 date: "2019-12-13"
 title: "Browser dev tools"
 image: ""

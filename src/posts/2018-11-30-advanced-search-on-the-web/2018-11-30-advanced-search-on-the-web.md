@@ -1,5 +1,5 @@
 ---
-path: "/advanced-internet-search"
+path: "/advanced-internet-search/"
 date: "2018-11-30"
 title: "Advanced Search on the internet"
 image: ""

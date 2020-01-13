@@ -13,26 +13,21 @@ Mytoori.com's front-end is built with React as a single page application (SPA). 
 ```html
 <!-- first response from https://mytoori.com/ -->
 
-
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible"
-        content="IE=edge">
-    <title>Mytoori</title>
-    <meta name="description"
-        content="Bilingual books">
-    <meta name="author"
-        content="Giwan Persaud">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Mytoori</title>
+        <meta name="description" content="Bilingual books" />
+        <meta name="author" content="Giwan Persaud" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
 
-<body>
-    <div id="app" />
-    <script src="app.js" />
-</body>
+    <body>
+        <div id="app" />
+        <script src="app.js" />
+    </body>
 </html>
 ```
 
