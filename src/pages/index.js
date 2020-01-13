@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Menu from "../components/menu"
+import Menu from "../components/mainMenu"
 import PostItem from "../components/postItem"
 import "../style/index.css"
 
