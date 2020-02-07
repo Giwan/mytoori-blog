@@ -1,19 +1,20 @@
 ---
-path: "/react-instead-of-jsp"
+path: "/react-server-pages"
 date: "2018-11-11"
-title: "React instead of JSP"
+title: "React Server Pages"
 image: ""
 author: "Giwan Persaud"
 published: true
 ---
 
-React can replace Java Server Pages (JSP), handlebarJS, etc. as a templating language. There are various reasons why might want this. Re-using knowledge you already have for example.
-Recently I had to work on a project that required JSP (Java Server Pages). My knowledge of JSP is pretty poor and so instead of JSP, I wondered if it would be possible to just use react on the server.
+React can replace Java Server Pages (JSP), handlebarJS, etc. as a templating language on the server. There are various reasons why might want this. Re-using knowledge you already have for example.
+
+Recently I had to work on a project that required JSP (Java Server Pages). My knowledge of JSP is pretty poor and so instead of JSP, I wondered if it would be possible to just use React on the server.
 
 ## The concept
 
-The idea is that react would be executed on the server, resulting in pure html and css, that would then be sent to the client.
-In reality react would simply be used where otherwise something like [handlebars.js](https://handlebarsjs.com/) or [ejs](https://github.com/tj/ejs) would be used.
+The idea is that react would be executed on the server, resulting in pure HTML and CSS, that is then sent to the client.
+In reality react is simply used where otherwise something like [handlebars.js](https://handlebarsjs.com/) or [ejs](https://github.com/tj/ejs) is used.
 
 ## The Benefits
 
@@ -96,7 +97,7 @@ mkdir views
 touch views/index.jsx
 ```
 
-Open the newly created index.jsx file to turn it into a react component that can be used to render the content.
+Open the newly created `index.jsx` file to convert it into a react component that renders the content.
 
 ```javascript
 // -- index.jsx
