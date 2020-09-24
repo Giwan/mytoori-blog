@@ -651,3 +651,9 @@ pre tt:after {
 
     overflow: auto;
 }
+
+blockquote {
+    font-size: 2em;
+    line-height: 1.35em;
+    opacity: 0.67;
+}
