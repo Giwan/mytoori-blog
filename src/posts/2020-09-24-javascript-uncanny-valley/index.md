@@ -1,6 +1,6 @@
 ---
 path: "/javascript-uncanny-valley"
-date: "2020-09-24"
+date: "2020-09-25"
 title: "JavaScript's Uncanny Valley"
 summary: "The uncanny valley is time needed for browsers to process JS code and build your application"
 image: ""
