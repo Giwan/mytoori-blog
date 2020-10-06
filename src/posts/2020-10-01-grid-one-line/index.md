@@ -5,7 +5,7 @@ title: "CSS grid one liners"
 summary: "CSS layouts achieved in a single line"
 image: ""
 author: "Giwan Persaud"
-published: true
+published: false
 ---
 
 Create interesting layouts quickly.
