@@ -243,3 +243,111 @@ curl --location --request GET 'http://localhost:8888/.netlify/functions/login/lo
 // API call response
 { "message": "access granted" }
 ```
+
+# Front-end using API end-point
+
+Fnow now the login button will call the end-point with the credentials. If HTTP 200 is received the front-end redirects to the /admin page.
+
+```bash
+npm i react-router react-router-dom
+```
+
+Update `index.js` so there is support for react-router from the root. Wrapp `<App />` in `<BrowserRouter>`.
+
+```javascript
+// index.js
+
+import React from "react"
+import ReactDOM from "react-dom"
+import "./index.css"
+import App from "./App"
+import { BrowserRouter } from "react-router-dom"
+
+ReactDOM.render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById("root")
+)
+```
+
+Next configure `App.js` with two routes. A `LoginPage` and a `AdminPage`. With the `<Switch />` component only one of the two routes is loaded.
+
+```javascript
+// App.js
+
+import React from "react"
+import "./App.css"
+import { Route, Switch, Link } from "react-router-dom"
+import AdminPage from "./components/AdminPage"
+import LoginPage from "./components/LoginPage"
+
+function App() {
+    return (
+        <div className="App">
+            <h1>Serverless functions demo</h1>
+            <Switch>
+                <Route path="/admin" component={AdminPage} />
+                <Route path="/" component={LoginPage} />
+            </Switch>
+        </div>
+    )
+}
+
+export default App
+```
+
+Create a components folder and add the `LoginPage.js` component. It shows a basic login form.
+If successful, the admin page is loaded in the `/admin` route. Note: There is no validation on the Admin page! This merely demonstrates that the app received a HTTP 200 from the server and redirected the client.
+
+```javascript
+// LoginPage.js
+
+import React from "react"
+
+export const headers = {
+    method: "POST",
+    "Content-Type": "application/json",
+}
+
+const LoginPage = ({ history }) => {
+    const handleSubmit = async e => {
+        e.preventDefault()
+        const { username, password } = e.currentTarget
+        if (!username.value && password.value) {
+            console.warning("username and password required")
+            return
+        }
+
+        try {
+            headers.body = JSON.stringify({
+                username: username.value,
+                password: password.value,
+            })
+            const response = await fetch(
+                "/.netlify/functions/login/login.js",
+                headers
+            )
+
+            if (!response.ok) {
+                throw new Error(`Login failed: ${response.status}`)
+            }
+
+            history.push("/admin")
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="username" required />
+            <input type="password" name="password" required />
+            <button>Login</button>
+        </form>
+    )
+}
+
+export default LoginPage
+```
