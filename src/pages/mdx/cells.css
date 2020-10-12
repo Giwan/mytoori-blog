@@ -1,0 +1,13 @@
+/* main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section {
+    flex: 1 0 250px;
+    background-color: mintcream;
+    min-height: 100px;
+    border: 1px solid palevioletred;
+    display: grid;
+    place-items: center;
+} */

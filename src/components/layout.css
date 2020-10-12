@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Work+Sans:400,500,700,900");
 
+:root {
+    --unit: 16px;
+}
+
 html {
     font-family: "Work Sans", sans-serif;
     -ms-text-size-adjust: 100%;
