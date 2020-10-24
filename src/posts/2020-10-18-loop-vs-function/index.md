@@ -93,6 +93,43 @@ function firstRecurringCharacter(input) {
 It effectively does the same thing exept it uses `every` instead of a for loop. Note `return isUnique`. If `false` is returned then the loop stops.
 At this point it might be hard to justify why this is "better".
 
+## Using a hash Table
+
+It's possible to optimise the looping by using a hash table. Effectively the values are stored in an object where it's easier to check if the key already exists in the object.
+
+```javascript
+function firstRecurringWithHashTable(input) {
+    const mapObject = {}
+    const result = input.find(item => {
+        if (mapObject[item]) {
+            console.log("Found duplicate. Stopping")
+            return item
+        }
+        mapObject[item] = true
+        return
+    })
+
+    return result
+}
+
+// call the function to test it
+const result1 = firstRecurringWithHashTable([2, 5, 1, 2, 3, 5, 1, 2, 4])
+console.assert(
+    result1 === 2,
+    "Expected the result to be 2 but received",
+    result1
+)
+console.log(result1) // returns 2
+
+console.log(firstRecurringWithHashTable([2, 1, 1, 2, 3, 5, 1, 2, 4])) // returns 1
+console.log(firstRecurringWithHashTable([2, 3, 4, 5])) // returns undefined
+
+console.log(firstRecurringWithHashTable([2, 5, 5, 2, 3, 5, 1, 2, 4])) // returns 5
+```
+
+By using the JS find function the loop terminates as soon as a duplicate is found. If no duplicate is found then the find will go through the entire list.
+Storing `true` as the value ensures that function is kept light.
+
 ## With closures?
 
 Ultimately the duplicate value, if found, should be returned. Using closures it's possible to split up the function.
