@@ -1,6 +1,7 @@
 import React from "react"
 import { spacing, colors } from "../components/style"
 import { showLongDate } from "../config/helpers"
+import "../style/postItem.css";
 
 const listItemStyle = {
     color: colors.primary,
@@ -27,32 +28,31 @@ const listItemStyle = {
         textAlign: "right",
         fontSize: "0.8em",
         marginBottom: spacing.default,
-        borderBottom: `10px solid lightgray`,
         fontFamily: "Helvetica",
         textTransform: "uppercase",
         color: colors.primary,
     },
     summary: {
         color: colors.primary,
-        fontSize: "1.2em",
+        fontSize: "1.1em",
         lineHeight: "1.42em",
     },
 }
 
 const PostItem = ({ node }) => {
     return (
-        <div style={listItemStyle}>
+        <div style={listItemStyle} className="mb-postItem__container">
             <a href={node.frontmatter.path} style={listItemStyle.link}>
                 {/* <img
                     src={node.frontmatter.image}
                     alt={node.frontmatter.image}
                 /> */}
 
-                <h1 style={listItemStyle.title}>{node.frontmatter.title}</h1>
-                <div style={listItemStyle.date}>
+                <h2 style={listItemStyle.title}>{node.frontmatter.title}</h2>
+                <div className="mb-postItem-date">
                     {showLongDate(node.frontmatter.date)}
                 </div>
-                <div style={listItemStyle.summary}>
+                <div className="mb-postItem-summary">
                     {/* {node.frontmatter.summary} */}
                     {node.excerpt}
                 </div>

@@ -1,5 +1,6 @@
 :root {
     --color-primary: #3e4654;
+    --color-secondary: #aaa;
 
     /* spacing */
     --spacing-default: 16px;
