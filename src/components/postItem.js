@@ -62,13 +62,3 @@ const PostItem = ({ node }) => {
 }
 
 export default PostItem
-
-/*
-
-<Image
-    url={node.frontmatter.image}
-    alt={node.frontmatter.image}
-    data-test={node.frontmatter.image}
-/>
-
- */
