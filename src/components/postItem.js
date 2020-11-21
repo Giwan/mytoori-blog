@@ -1,7 +1,7 @@
 import React from "react"
 import { spacing, colors } from "../components/style"
 import { showLongDate } from "../config/helpers"
-import "../style/postItem.css";
+import "../style/postItem.css"
 
 const listItemStyle = {
     color: colors.primary,
@@ -47,8 +47,11 @@ const PostItem = ({ node }) => {
                     src={node.frontmatter.image}
                     alt={node.frontmatter.image}
                 /> */}
-
-                <h2 style={listItemStyle.title}>{node.frontmatter.title}</h2>
+                <div className="mb-postItem-title">
+                    <h2 style={listItemStyle.title}>
+                        {node.frontmatter.title}
+                    </h2>
+                </div>
                 <div className="mb-postItem-date">
                     {showLongDate(node.frontmatter.date)}
                 </div>

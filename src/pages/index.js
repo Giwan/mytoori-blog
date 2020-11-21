@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Menu from "../components/mainMenu"
 import PostItem from "../components/postItem"
 import "../style/index.css"
 
@@ -15,7 +14,6 @@ const Index = ({
     ))
     return (
         <Layout>
-            <Menu />
             <div className="mb-posts__container">{Posts}</div>
         </Layout>
     )

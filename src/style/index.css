@@ -2,20 +2,23 @@
 
 main {
     /* display: grid;  */
-    padding: var(--unit); 
+    padding: var(--unit);
     max-width: 960px;
     margin: 0 auto;
 }
 
-header {
-    margin: 0 auto; 
-    max-width: 960px; 
-    padding: 1.45rem 0;
-    padding-bottom: 0;
+header h1 {
+    margin: 0;
 }
 
 header a {
-    color: var(--color-primary); 
+    color: var(--color-primary);
+    transition: scale 0.2s;
+    display: inline-block;
+}
+
+header a:active {
+    transform: scale(0.95);
 }
 
 /* Under 600px it will just take up the whole width */
@@ -30,4 +33,37 @@ header a {
 
 .mb-tools__container a {
     color: var(--color-primary);
+}
+
+.mb-header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: calc(var(--unit) * 2);
+    width: 100%;
+}
+
+.mb-menu {
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+
+.mb-menu-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: "Work Sans", "Helvetica", "sans-serif";
+    margin-left: var(--unit);
+    color: var(--color-primary);
+    transition: border 0.2s, scale 0.2s;
+    border-bottom: 1px solid transparent;
+    display: inline-block;
+}
+
+.mb-menu-link:hover {
+    border-bottom-color: var(--color-secondary);
+}
+
+.mb-menu-link:active {
+    transform: scale(0.95);
 }
