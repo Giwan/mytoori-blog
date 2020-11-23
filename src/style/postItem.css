@@ -1,3 +1,10 @@
+.mb-postItem__container {
+    margin-bottom: calc(var(--unit) * 2);
+}
+.mb-postItem__container a {
+    text-decoration: none;
+}
+
 .mb-postItem-title {
     overflow: hidden;
     height: calc(var(--unit) * 8);
@@ -7,6 +14,12 @@
 .mb-postItem-title h2 {
     font-weight: 600;
     color: var(--color-primary);
+    font-family: "Work Sans", "Helvetica", "sans-serif";
+    transition: scale 0.2s;
+}
+
+.mb-postItem-title h2:active {
+    transform: scale(0.95);
 }
 
 .mb-postItem-date {
@@ -20,6 +33,6 @@
 .mb-postItem-summary {
     color: var(--color-primary);
     font-size: 1.05em;
-    line-height: 1.42em;
+    line-height: 1.65em;
     font-family: "Roboto Slab", "georgia", "serif";
 }
