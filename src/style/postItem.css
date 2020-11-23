@@ -1,10 +1,12 @@
 .mb-postItem-title {
     overflow: hidden;
     height: calc(var(--unit) * 8);
+    color: var(--color-primary);
 }
 
 .mb-postItem-title h2 {
     font-weight: 600;
+    color: var(--color-primary);
 }
 
 .mb-postItem-date {

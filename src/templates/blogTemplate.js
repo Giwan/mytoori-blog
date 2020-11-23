@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import { showLongDate } from "../config/helpers"
 import { colors, spacing } from "../components/style"
 // import Image from "../components/image";
+import "../style/blogPostTemplate.css"
 
 const blogPost = {
     container: {
@@ -47,22 +48,18 @@ export default function Template({
     return (
         <Layout>
             <div style={blogPost.container}>
-                <article className="blog-post">
-                    <header style={blogPost.header}>
-                        <h1 style={blogPost.header.title}>
-                            {frontmatter.title}
-                        </h1>
+                <article className="md-post--container">
+                    <header className="md-post--header">
+                        <h1>{frontmatter.title}</h1>
 
-                        <div style={blogPost.header.date}>
+                        <p className="md-post--date">
                             {showLongDate(frontmatter.date)} -{" "}
                             {frontmatter.author}
-                        </div>
-                        <div style={blogPost.header.summary}>
-                            {frontmatter.summary}
-                        </div>
+                        </p>
+                        <p>{frontmatter.summary}</p>
                     </header>
-                    <article
-                        style={blogPost.content}
+                    <main
+                        className="md-post--content"
                         dangerouslySetInnerHTML={{ __html: html }}
                     />
                 </article>

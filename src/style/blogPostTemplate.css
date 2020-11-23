@@ -1,0 +1,24 @@
+.md-post--container {
+    font-size: var(--font-size-default);
+    line-height: 1.45em;
+}
+
+.md-post--header {
+    color: var(--color-primary);
+}
+
+.md-post--date {
+    margin-bottom: var(--unit);
+    color: var(--color-secondary);
+    font-family: "Work sans", "Helvetica", "Arial", "sans-serif";
+    font-weight: 400;
+}
+
+.md-post--content {
+    padding: 0;
+}
+
+.md-post--content a {
+    font-family: "Work sans", "Helvetica", "Arial", "sans-serif";
+    font-size: 1.2em;
+}

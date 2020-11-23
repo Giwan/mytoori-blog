@@ -10,9 +10,9 @@ published: true
 
 With a large amount of Javascript, the client CPU, be it laptop or phone, will have to work hard to build the page. That build time is the **uncanny valley**.
 
-> Some real world applications send **thousands** of lines of JS (including data) are being sent the browser to process.
+> Some real world applications send **thousands** of lines of JS (including data) to the browser.
 
-This is wasteful in many ways. There is network transfer and CPU processing happening that is totally uncessary. This also drains battery power.
+It's wasteful in many ways. There is unecessary network transfer and CPU processing. Obviously it's also very wastefull for your battery.
 From a UX perspective the user is also waiting much longer than necessary.
 
 # Rendering an SPA

@@ -17,13 +17,16 @@ This post goes through the steps to deploy the static site on github.
 
 Using `npx` create a new project.
 
-```
-npx create-next-app nextjs-demo
+```bash
+# Create new NextJS project
+$ npx create-next-app nextjs-demo
 ```
 
 Enter the project and open the file `/pages/index.js`. Replace the contents of the file with this:
 
-```javascript
+```jsx
+/* /pages/index.js */
+
 import Head from "next/head"
 import styles from "../styles/Home.module.css"
 
@@ -54,12 +57,13 @@ The gh-pages package copies the contents of the `out` folder to a separate branc
 `npm i gh-pages` installs `gh-pages` into the project.
 Next use gh-pages to generate the out folder and copy it to gh-pages git branch.
 
-```
-rm -rf node_modules/.cache && rm -rf out && next build && next export && touch out/.nojekyll && gh-pages -d out -t true
+```bash
+# deploy to github pages
+$ rm -rf node_modules/.cache && rm -rf out && next build && next export && touch out/.nojekyll && gh-pages -d out -t true
 ```
 
 Add it with a script to `package.json`. For example `deploy`.
-Run `npm run deploy`.
+Then, execute `npm run deploy`.
 
 # github configuration
 
@@ -68,7 +72,7 @@ In the settings, scroll down to the section where you can configure gh-pages.
 
 There switch to the branch `gh-pages`. The folder should be pointed to `/` (root).
 
-Your project should now be available at `https://github.io/<username>/<project-name>`
+Your project should now be available at: `https://github.io/<username>/<project-name>`
 
 ## Custom domain name
 
@@ -76,10 +80,14 @@ Add the custom domain name you plan to use. For example `test.example.com`.
 
 Login to your DNS provider. For example if you're using vercel it can be added with.
 
-```
-now dns add example.com test CNAME github.io/<username>/<project-name>
+```bash
+# add DNS subdomain
+$ now dns add example.com test CNAME github.io/<username>/<project-name>
 ```
 
 ## Sources
 
-NextJS | https://nextjs.org/
+| Name   | Link                |
+| ------ | ------------------- |
+| NextJS | https://nextjs.org/ |
+| Vercel | https://vercel.com/ |
