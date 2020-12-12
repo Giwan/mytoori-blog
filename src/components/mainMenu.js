@@ -12,6 +12,10 @@ const menuItems = [
         target: "/tools",
     },
     {
+        label: "Design",
+        target: "/design",
+    },
+    {
         label: "about",
         target: "/about",
     },

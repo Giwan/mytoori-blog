@@ -1,0 +1,14 @@
+.design {
+    background-color: #000;
+    min-height: 100vh;
+}
+
+.design h1 {
+    color: white;
+}
+
+.design-page {
+    border: 1px solid silver;
+    width: 800px;
+    height: 1000px;
+}
