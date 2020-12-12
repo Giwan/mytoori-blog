@@ -1,7 +1,7 @@
 ---
 path: "/json-resume"
 date: "2020-12-3"
-title: "JSON Resume"
+title: "Store your resume as a JSON file"
 summary: "Store your resume in a JSON doc and then apply various styles to it"
 image: ""
 author: "Giwan Persaud"

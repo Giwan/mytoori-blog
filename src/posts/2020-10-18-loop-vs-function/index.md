@@ -1,7 +1,7 @@
 ---
 path: "/loop-vs-function"
 date: "2020-10-18"
-title: "Loop versus function"
+title: "Using a function instead of a loop"
 summary: "Using for loops is basic however JS offers several ways of looping with functions."
 image: ""
 author: "Giwan Persaud"
@@ -76,7 +76,7 @@ function firstRecurringCharacter(input) {
     let uniqueList = []
     let duplicateVal
 
-    input.every(val => {
+    input.every((val) => {
         const isUnique = !uniqueList.includes(val)
         if (isUnique) uniqueList.push(val)
         else {
@@ -100,7 +100,7 @@ It's possible to optimise the looping by using a hash table. Effectively the val
 ```javascript
 function firstRecurringWithHashTable(input) {
     const mapObject = {}
-    const result = input.find(item => {
+    const result = input.find((item) => {
         if (mapObject[item]) {
             console.log("Found duplicate. Stopping")
             return item
@@ -139,7 +139,7 @@ const helper1 = (() => {
     let uniqueList = []
     let _duplicate
 
-    return function(val) {
+    return function (val) {
         const isUnique = !uniqueList.includes(val)
         if (isUnique) uniqueList.push(val)
         else _duplicate = val
@@ -159,7 +159,7 @@ const helper1 = (() => {
 function firstRecurringCharacter(input) {
     helper1().reset()
 
-    input.every(val => {
+    input.every((val) => {
         const { isUnique } = helper1(val)
         return isUnique
     })
