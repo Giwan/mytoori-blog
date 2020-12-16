@@ -17,6 +17,7 @@ export const labels = Object.freeze({
     project: "project",
     management: "management",
     writing: "writing",
+    reading: "reading",
 })
 
 const tools = [

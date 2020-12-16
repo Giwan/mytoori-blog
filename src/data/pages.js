@@ -19,4 +19,10 @@ export const designPages = [
         labels: [labels.education, labels.productivity],
         description: "AI determines CEFR level at 90% accuracy",
     },
+    {
+        url: "https://eclecticlight.co",
+        imgName: "/v1608150757/landing_pages/eclecticlight.co",
+        labels: [labels.reading],
+        description: "Well designed blog",
+    },
 ]
