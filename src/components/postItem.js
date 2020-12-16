@@ -1,5 +1,4 @@
 import React from "react"
-import { spacing, colors } from "../components/style"
 import { showLongDate } from "../config/helpers"
 import "../style/postItem.css"
 

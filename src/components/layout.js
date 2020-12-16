@@ -4,7 +4,7 @@ import Helmet from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "../style/layout.css"
-import { meta } from "../config/helpers"
+import { metaData } from "../config/helpers"
 import Menu from "./mainMenu"
 
 const Layout = ({ children }) => (
@@ -20,7 +20,7 @@ const Layout = ({ children }) => (
         `}
         render={(data) => (
             <main className="mainContainer">
-                <Helmet title={data.site.siteMetadata.title} meta={meta}>
+                <Helmet title={data.site.siteMetadata.title} meta={metaData}>
                     <html lang="en" />
                 </Helmet>
                 <div className="mb-header__container">

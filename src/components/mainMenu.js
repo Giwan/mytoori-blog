@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "gatsby"
-import { colors, font, spacing } from "./style"
 
 const menuItems = [
     {

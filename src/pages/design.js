@@ -11,6 +11,7 @@ const Design = () => (
         <section>
             {pages.map((page) => (
                 <a
+                    key={page.url}
                     href={page.url}
                     target="_blank"
                     rel="norel noreferrer"
@@ -18,7 +19,6 @@ const Design = () => (
                 >
                     <img
                         className="design-page"
-                        key={page.url}
                         alt={`${page.url} landing page - ${page.description}`}
                         src={`${cloudinaryPrefix}${page.imgName}`}
                     />
