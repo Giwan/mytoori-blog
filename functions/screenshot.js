@@ -31,12 +31,14 @@ exports.handler = async (event) => {
         }
 
         const screenshotData = await makeScreenshot(url);
+        const path = await uploadToCloudinary(screenshotData, url);
 
         return {
             statusCode: 200,
             headers,
             body: JSON.stringify({
-                path: await uploadToCloudinary(screenshotData, url),
+                path,
+                file: path.replace(/^http(.*)upload/, ""),
             }),
         };
     } catch (error) {

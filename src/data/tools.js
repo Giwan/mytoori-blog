@@ -5,7 +5,7 @@ export const categories = Object.freeze({
     MARKETING: "Marketing",
     PROJECT_MANAGEMENT: "Project Management",
     WRITING: "Writing",
-})
+});
 
 export const labels = Object.freeze({
     design: "design",
@@ -18,7 +18,8 @@ export const labels = Object.freeze({
     management: "management",
     writing: "writing",
     reading: "reading",
-})
+    markdown: "markdown",
+});
 
 const tools = [
     {
@@ -46,6 +47,6 @@ const tools = [
         category: categories.WRITING,
         labels: [labels.productivity, labels.writing],
     },
-]
+];
 
-export default tools
+export default tools;

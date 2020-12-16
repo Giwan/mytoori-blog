@@ -1,4 +1,4 @@
-import { labels } from "./tools"
+import { labels } from "./tools";
 
 export const designPages = [
     {
@@ -25,4 +25,16 @@ export const designPages = [
         labels: [labels.reading],
         description: "Well designed blog",
     },
-]
+    {
+        url: "https://hackmd.io",
+        imgName: "/v1608156649/landing_pages/hackmd.io.png",
+        labels: [labels.writing, labels.markdown],
+        description: "Everyone on the same page with Markdown",
+    },
+    {
+        url: "http://www.hemingwayapp.com/desktop.html",
+        imgName: "/v1608155618/landing_pages/www.hemingwayapp.com",
+        labels: [labels.writing],
+        description: "Cuts the dead weight from your writing",
+    },
+];

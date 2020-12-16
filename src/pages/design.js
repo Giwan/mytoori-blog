@@ -1,10 +1,12 @@
-import React from "react"
-import "../style/design.css"
+import React from "react";
+import "../style/design.css";
 
-import { designPages as pages } from "../data/pages"
+import { designPages as pages } from "../data/pages";
 
-const cloudinaryPrefix = "https://res.cloudinary.com/mytoori/image/upload"
+const cloudinaryPrefix = "https://res.cloudinary.com/mytoori/image/upload";
 
+// TODO: use Link for internal links like mytoori.com
+// warning in console
 const Design = () => (
     <main className="design">
         <h1>Design</h1>
@@ -26,6 +28,6 @@ const Design = () => (
             ))}
         </section>
     </main>
-)
+);
 
-export default Design
+export default Design;
