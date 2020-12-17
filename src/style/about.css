@@ -4,4 +4,5 @@
     /* padding: var(--spacing-default); */
     font-family: var(--font-family-default);
     font-size: var(--font-size-default);
+    line-height: 1.6em;
 }

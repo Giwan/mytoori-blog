@@ -1,6 +1,7 @@
 :root {
     --color-primary: #031026;
     --color-secondary: #aaa;
+    --color-accent: silver;
 
     /* spacing */
     --spacing-default: 16px;
@@ -8,4 +9,9 @@
     /* font */
     --font-size-default: 24px;
     --font-family-default: "Georgia";
+
+    --unit: 16px;
+
+    --page-width-full: 100vw;
+    --page-width-small: 960px;
 }

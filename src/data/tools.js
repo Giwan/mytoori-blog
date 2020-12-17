@@ -19,6 +19,7 @@ export const labels = Object.freeze({
     writing: "writing",
     reading: "reading",
     markdown: "markdown",
+    commerce: "commerce",
 });
 
 const tools = [

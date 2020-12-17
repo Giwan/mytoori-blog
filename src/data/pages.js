@@ -37,4 +37,10 @@ export const designPages = [
         labels: [labels.writing],
         description: "Cuts the dead weight from your writing",
     },
+    {
+        url: "https://thegoodroll.com/en/",
+        imgName: "/v1608229571/landing_pages/thegoodroll.com",
+        labels: [labels.commerce],
+        description: "happiness on your toilet with The Good Roll",
+    },
 ];

@@ -1,15 +1,12 @@
-import React from "react"
-import "../style/tools.css"
-import Layout from "../components/layout"
-import Header from "../components/header"
-import tools from "../data/tools"
+import React from "react";
+import "../style/tools.css";
+import Layout from "../components/layout";
+import tools from "../data/tools";
 // Behance.net, Dribble.com
 
 const ToolsPage = () => (
-    <Layout>
-        <Header />
+    <Layout subTitle="tools">
         <article className="mb-tools__container">
-            <h1>Tools</h1>
             <p>
                 Some of the tools I use on a regular basis. These are typically
                 the tools I would recommend to others as well.
@@ -22,9 +19,9 @@ const ToolsPage = () => (
             </section>
         </article>
     </Layout>
-)
+);
 
-export default ToolsPage
+export default ToolsPage;
 
 /**
  * The tools item. This is basically a page item for that tool.
@@ -41,4 +38,4 @@ const ToolItem = ({ tool }) => (
                 tool.labels.map((label) => <label key={label}>{label}</label>)}
         </footer>
     </article>
-)
+);

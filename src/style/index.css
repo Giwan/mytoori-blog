@@ -1,9 +1,8 @@
 @import "variables.css";
 
 main {
-    /* display: grid;  */
-    padding: var(--unit);
-    max-width: 960px;
+    padding-top: var(--unit);
+    max-width: var(--page-width-small);
     margin: 0 auto;
 }
 
@@ -39,8 +38,9 @@ header a:active {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: calc(var(--unit) * 2);
+    margin: 0 auto calc(var(--unit) * 2) auto;
     width: 100%;
+    max-width: var(--page-width-small);
 }
 
 .mb-menu {
@@ -66,4 +66,26 @@ header a:active {
 
 .mb-menu-link:active {
     transform: scale(0.95);
+}
+
+.gatsby-highlight {
+    background-color: var(--color-primary); /* #3e4654; /*  rgb(25, 25, 25); */
+    color: #fefefe;
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid rgb(20, 20, 20);
+
+    overflow: auto;
+}
+
+.mainContainer {
+    max-width: initial;
+}
+
+.designContainer {
+    min-width: var(--page-width-full);
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }

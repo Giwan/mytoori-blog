@@ -1,0 +1,5 @@
+.header h2 {
+    color: var(--color-accent);
+    font-style: italic;
+    transform: rotate(-10deg);
+}

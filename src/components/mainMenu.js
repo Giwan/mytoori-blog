@@ -1,10 +1,10 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import { Link } from "gatsby";
 
 const menuItems = [
     {
-        label: "Mytoori.com",
-        target: "https://mytoori.com",
+        label: "Blog",
+        target: "/",
     },
     {
         label: "tools",
@@ -18,7 +18,7 @@ const menuItems = [
         label: "about",
         target: "/about",
     },
-]
+];
 
 const Menu = () => (
     <nav className="mb-menu">
@@ -28,6 +28,6 @@ const Menu = () => (
             </Link>
         ))}
     </nav>
-)
+);
 
-export default Menu
+export default Menu;
