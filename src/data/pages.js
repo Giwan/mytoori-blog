@@ -38,7 +38,7 @@ export const designPages = [
         description: "Everyone on the same page with Markdown",
     },
     {
-        url: "http://www.hemingwayapp.com/desktop.html",
+        url: "https://www.hemingwayapp.com/desktop.html",
         imgName: "/v1608155618/landing_pages/www.hemingwayapp.com",
         labels: [labels.writing],
         description: "Cuts the dead weight from your writing",
