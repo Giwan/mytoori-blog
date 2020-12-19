@@ -2,6 +2,12 @@ import { labels } from "./tools";
 
 export const designPages = [
     {
+        url: "https://www.mozilla.org",
+        imgName: "/v1608401248/landing_pages/www.mozilla.org.png",
+        labels: [labels.productivity],
+        description: "Great browser.",
+    },
+    {
         url: "https://mytoori.com",
         imgName: "/v1607982756/landing_pages/mytoori.com",
         labels: [labels.education, labels.productivity],
@@ -42,5 +48,11 @@ export const designPages = [
         imgName: "/v1608229571/landing_pages/thegoodroll.com",
         labels: [labels.commerce],
         description: "happiness on your toilet with The Good Roll",
+    },
+    {
+        url: "https://miro.com/",
+        imgName: "/v1608399050/landing_pages/miro.com.png",
+        labels: [labels.productivity],
+        description: "online White board",
     },
 ];

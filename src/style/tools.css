@@ -15,8 +15,8 @@ h1 {
 
 .mb-tools_list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--unit);
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(var(--unit) * 2);
 }
 
 .mb-tools_item footer label {
