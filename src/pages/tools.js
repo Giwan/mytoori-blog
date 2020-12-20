@@ -30,12 +30,23 @@ export default ToolsPage;
 const ToolItem = ({ tool }) => (
     <article className="mb-tools_item">
         <h2>
-            <a href={tool.url}>{tool.title}</a>
+            <a
+                href={tool.url}
+                target="_blank"
+                rel="norel noreferrer"
+                alt={`${tool.title} - ${tool.description}`}
+            >
+                {tool.title}
+            </a>
         </h2>
         <p>{tool.description}</p>
         <footer>
             {Array.isArray(tool.labels) &&
-                tool.labels.map((label) => <label key={label}>{label}</label>)}
+                tool.labels.map((label) => (
+                    <label key={label}>
+                        <span>{label}</span>
+                    </label>
+                ))}
         </footer>
     </article>
 );

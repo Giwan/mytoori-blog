@@ -15,8 +15,17 @@ h1 {
 
 .mb-tools_list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
     gap: calc(var(--unit) * 2);
+}
+
+.mb-tools_item {
+    /* background-color: red; */
+}
+
+.mb-tools_item footer {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .mb-tools_item footer label {
@@ -27,6 +36,11 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.75em;
     margin-right: 8px;
+    margin-top: 8px;
+    overflow-wrap: normal;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 }
 
 @media (min-width: 600px) {
