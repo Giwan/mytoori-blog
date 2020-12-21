@@ -19,8 +19,11 @@ h1 {
     gap: calc(var(--unit) * 2);
 }
 
-.mb-tools_item {
-    /* background-color: red; */
+.mb-tools_item a {
+    text-decoration: initial;
+}
+.mb-tools_item a:hover h2 {
+    text-decoration: underline;
 }
 
 .mb-tools_item footer {
