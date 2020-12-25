@@ -1,11 +1,11 @@
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 const siteMetadata = {
     title: "Mytoori blog",
     author: "Giwan Persaud",
-}
+};
 
 /**
  * Access the file system
@@ -17,7 +17,7 @@ const sourceFileSystem = {
         path: `${__dirname}/src/posts`,
         name: "markdown-pages",
     },
-}
+};
 
 /**
  * Used to read markdown files and transform
@@ -36,14 +36,14 @@ const transformerRemark = {
             },
         ],
     },
-}
+};
 
 const googleAnalytics = {
     resolve: `gatsby-plugin-google-analytics`,
     options: {
         trackingId: "UA-75146522-4",
     },
-}
+};
 
 /**
  * Read images from the file system
@@ -54,7 +54,7 @@ const sourceFilesystem = {
         name: `images`,
         path: `${__dirname}/src/images`,
     },
-}
+};
 
 /**
  * Creates a manifest file for PWA
@@ -70,7 +70,7 @@ const pluginManifest = {
         display: "minimal-ui",
         icon: "src/images/favicon.svg", // This path is relative to the root of the site.
     },
-}
+};
 
 module.exports = {
     siteMetadata,
@@ -81,6 +81,12 @@ module.exports = {
         "gatsby-plugin-react-helmet",
         "gatsby-transformer-sharp",
         "gatsby-plugin-sharp",
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                path: `${__dirname}/src/pages`,
+            },
+        },
         pluginManifest,
         sourceFilesystem,
         `gatsby-plugin-mdx`,
@@ -88,4 +94,4 @@ module.exports = {
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
     ],
-}
+};
