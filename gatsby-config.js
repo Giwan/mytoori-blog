@@ -11,11 +11,19 @@ const siteMetadata = {
  * Access the file system
  * and read markdown pages.
  */
-const sourceFileSystem = {
+const sourceFileSystemPosts = {
     resolve: `gatsby-source-filesystem`,
     options: {
-        path: `${__dirname}/src/posts`,
-        name: "markdown-pages",
+        name: "posts",
+        path: `${__dirname}/src/posts/`,
+    },
+};
+
+const sourceFileSystemPages = {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+        name: "pages",
+        path: `${__dirname}/src/pages/`,
     },
 };
 
@@ -31,7 +39,7 @@ const transformerRemark = {
                 resolve: `gatsby-remark-prismjs`,
                 options: {
                     classPrefix: null,
-                    showLineNumbers: false,
+                    showLineNumbers: true,
                 },
             },
         ],
@@ -48,7 +56,7 @@ const googleAnalytics = {
 /**
  * Read images from the file system
  */
-const sourceFilesystem = {
+const sourceFilesystemImages = {
     resolve: `gatsby-source-filesystem`,
     options: {
         name: `images`,
@@ -72,10 +80,22 @@ const pluginManifest = {
     },
 };
 
+const gatsbyPlugMdx = {
+    resolve: `gatsby-plugin-mdx`,
+    options: {
+        extensions: [".mdx", ".md"],
+        defaultLayouts: {
+            pages: require.resolve("./src/templates/blogTemplate.js"),
+            default: require.resolve("./src/templates/blogTemplate.js"),
+        },
+    },
+};
+
 module.exports = {
     siteMetadata,
     plugins: [
-        sourceFileSystem,
+        sourceFileSystemPosts,
+        sourceFileSystemPages,
         transformerRemark,
         googleAnalytics,
         "gatsby-plugin-react-helmet",
@@ -88,8 +108,9 @@ module.exports = {
             },
         },
         pluginManifest,
-        sourceFilesystem,
-        `gatsby-plugin-mdx`,
+        sourceFilesystemImages,
+        gatsbyPlugMdx,
+
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
