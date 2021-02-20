@@ -1,10 +1,10 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import { showLongDate } from "../config/helpers"
-import { colors, spacing } from "../components/style"
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/layout";
+import { showLongDate } from "../config/helpers";
+import { colors, spacing } from "../components/style";
 // import Image from "../components/image";
-import "../style/blogPostTemplate.css"
+import "../style/blogPostTemplate.css";
 
 const blogPost = {
     container: {
@@ -38,13 +38,13 @@ const blogPost = {
         fontSize: 22,
         lineHeight: "1.6em",
     },
-}
+};
 
 export default function Template({
     data, // this prop will be injected by the GraphQL query below.
 }) {
-    const { markdownRemark = {} } = data // data.markdownRemark holds our post data
-    const { frontmatter, html } = markdownRemark
+    const { markdownRemark = {} } = data; // data.markdownRemark holds our post data
+    const { frontmatter, html } = markdownRemark;
     return (
         <Layout>
             <div style={blogPost.container}>
@@ -65,7 +65,7 @@ export default function Template({
                 </article>
             </div>
         </Layout>
-    )
+    );
 }
 
 export const pageQuery = graphql`
@@ -82,4 +82,4 @@ export const pageQuery = graphql`
             }
         }
     }
-`
+`;
